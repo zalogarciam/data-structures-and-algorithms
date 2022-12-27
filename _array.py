@@ -2,24 +2,25 @@
 # Insert (O(n) 10, 20, 30, 40, 50 ---> 10, 20, 30, 40, 50, _, _, _
 # Delete (O(n) _, 20, 30, 40, 50) ---> Worst case since we need to shift to the left all items
 
-numbers = [10, 20, 30];
-print(numbers)
-
 class MyArray():
     def __init__(self, size):
         self.size = size
-        self.items = []
+        self.items = [None] * size
+        self.index = 0
 
     def insert(self, item):
-        if (self.size > len(self.items)):
-            self.items.append(item)
+        if (self.size > self.index):
+            self.items[self.index] = item
         else:
             print("Capacity is not enough, duplicating array size")
+            newItems = [None] * self.size * 2
+            for i in range(self.size):
+                newItems[i] = self.items[i]
+            self.items = newItems
             self.size = self.size * 2
-            self.items.append(item)
-            for i in range(len(self.items), self.size):
-                self.items.append(None)
+            self.items[self.index] = item
 
+        self.index += 1
 
     def removeAt(self, index):
         self.items.remove(self.items[index])
@@ -33,7 +34,7 @@ class MyArray():
 
     def printItems(self):
         for i in range(self.size):
-            print("Item "+ str(i) + ":" + str(self.items[i]))
+            print("Item "+ str(i) + ": " + str(self.items[i]))
         print(self.items)
 
 myArray = MyArray(3)
@@ -41,5 +42,9 @@ myArray.insert(10)
 myArray.insert(20)
 myArray.insert(30)
 myArray.insert(40)
+myArray.insert(50)
+myArray.insert(60)
+myArray.insert(70)
+
 myArray.indexOf(40)
 myArray.printItems()
