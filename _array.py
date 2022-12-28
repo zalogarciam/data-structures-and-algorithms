@@ -23,8 +23,12 @@ class MyArray():
         self.index += 1
 
     def removeAt(self, index):
-        self.items.remove(self.items[index])
-
+        for i in range(index, self.size):
+            if i + 1 < self.size:
+                self.items[i] = self.items[i + 1]
+            else:
+                self.items[i] = None
+        
     def indexOf(self, item):
         for i in range(self.size):
             if self.items[i] == item:
@@ -44,7 +48,7 @@ myArray.insert(30)
 myArray.insert(40)
 myArray.insert(50)
 myArray.insert(60)
-myArray.insert(70)
-
+myArray.printItems()
+myArray.removeAt(3)
 myArray.indexOf(40)
 myArray.printItems()
