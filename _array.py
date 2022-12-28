@@ -36,9 +36,43 @@ class MyArray():
                 return i
         return -1
 
+    def getItem(self, index):
+        return self.items[index]
+
     def printItems(self):
         for i in range(self.index):
             print("Item "+ str(i) + ": " + str(self.items[i]))
+
+    def max(self):
+        max = -1
+        for i in range(self.index):
+            if self.items[i] > max:
+                max = self.items[i]
+        print("Max: " + str(max))
+        return max
+
+    def intersect(self, first_array, second_array):
+        dict = {}
+        for i in range(first_array.index):
+            if first_array.getItem(i) not in dict:
+                dict[first_array.getItem(i)] = 1
+            else:
+                dict[first_array.getItem(i)] += 1
+
+        for i in range(second_array.index):
+            if second_array.getItem(i) not in dict:
+                dict[second_array.getItem(i)] = 1
+            else:
+                dict[second_array.getItem(i)] += 1
+        
+        for key in dict:
+            if (dict[key] > 1):
+                print("Intersecting: " + str(key))
+
+    def reverse(self):
+        for i in range(self.index - 1, - 1, - 1):
+            print("Item "+ str(i) + ": " + str(self.items[i]))
+
 
 myArray = MyArray(3)
 myArray.insert(10)
@@ -51,3 +85,13 @@ myArray.printItems()
 myArray.removeAt(3)
 myArray.indexOf(40)
 myArray.printItems()
+myArray.max()
+
+myArray2 = MyArray(3)
+myArray2.insert(10)
+myArray2.insert(40)
+myArray2.insert(60)
+
+myArray.intersect(myArray, myArray2)
+
+myArray.reverse()
