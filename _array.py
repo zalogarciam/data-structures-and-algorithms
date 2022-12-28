@@ -1,4 +1,5 @@
-# Lookup O(1) 100, 104, 108 ... addresses in memory
+# Lookup by index O(1) 100, 104, 108 ... addresses in memory
+# Lookup by Value is O(n)
 # Insert (O(n) 10, 20, 30, 40, 50 ---> 10, 20, 30, 40, 50, _, _, _
 # Delete (O(n) _, 20, 30, 40, 50) ---> Worst case since we need to shift to the left all items
 
@@ -22,15 +23,16 @@ class MyArray():
     def removeAt(self, index):
         if index < 0 or index > self.size - 1:
             raise Exception("Index out of range")
-        for i in range(index, self.size):
-            if i + 1 < self.size:
-                self.items[i] = self.items[i + 1]
-            else:
-                self.items[i] = None
-        self.index -= 1
-        
+        else:
+            for i in range(index, self.size):
+                if i + 1 < self.size:
+                    self.items[i] = self.items[i + 1]
+                else:
+                    self.items[i] = None
+            self.index -= 1
+
     def indexOf(self, item):
-        for i in range(self.size):
+        for i in range(self.index):
             if self.items[i] == item:
                 print(i)
                 return i
@@ -73,6 +75,12 @@ class MyArray():
         for i in range(self.index - 1, - 1, - 1):
             print("Item "+ str(i) + ": " + str(self.items[i]))
 
+    def insertAt(self, item, index):
+        for i in range(self.index, index , -1):
+            self.items[i] = self.items[i - 1]
+        self.items[index] = item
+
+
 
 myArray = MyArray(3)
 myArray.insert(10)
@@ -86,6 +94,7 @@ myArray.removeAt(3)
 myArray.indexOf(40)
 myArray.printItems()
 myArray.max()
+myArray.insertAt(15, 1)
 
 myArray2 = MyArray(3)
 myArray2.insert(10)
