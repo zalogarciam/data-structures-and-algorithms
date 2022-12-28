@@ -9,25 +9,25 @@ class MyArray():
         self.index = 0
 
     def insert(self, item):
-        if (self.size > self.index):
-            self.items[self.index] = item
-        else:
-            print("Capacity is not enough, duplicating array size")
+        if (self.size == self.index):
             newItems = [None] * self.size * 2
             for i in range(self.size):
                 newItems[i] = self.items[i]
             self.items = newItems
             self.size = self.size * 2
-            self.items[self.index] = item
-
+        
+        self.items[self.index] = item
         self.index += 1
 
     def removeAt(self, index):
+        if index < 0 or index > self.size - 1:
+            raise Exception("Index out of range")
         for i in range(index, self.size):
             if i + 1 < self.size:
                 self.items[i] = self.items[i + 1]
             else:
                 self.items[i] = None
+        self.index -= 1
         
     def indexOf(self, item):
         for i in range(self.size):
@@ -37,9 +37,8 @@ class MyArray():
         return -1
 
     def printItems(self):
-        for i in range(self.size):
+        for i in range(self.index):
             print("Item "+ str(i) + ": " + str(self.items[i]))
-        print(self.items)
 
 myArray = MyArray(3)
 myArray.insert(10)
