@@ -24,20 +24,39 @@ class LinkedList():
     def add_first(self, value):
         if self.head is None:
             self.head = Node(value)
-            self.index += 1
-        else:
-            print("Head already added")
+        else:  
+            new_head = Node(value)
+            new_head.next = self.head
+            self.head = new_head
+        self.index += 1
 
     def add_last(self, value):
         if self.tail is None:
             self.tail = Node(value)
             self.head.next = self.tail
-            self.index += 1
         else:
-            print("Tail already added")
+            self.tail.next = Node(value)
+            self.tail = self.tail.next
+        self.index += 1
 
+
+    def delete_first(self):
+        self.head = self.head.next
+
+    def delete_last(self):
+        current = self.head
+        while(current.next.next is not None):
+            current = current.next
+        current.next = None
+        self.tail = current        
 
 linkedList = LinkedList()
 linkedList.add_first(1)
 linkedList.add_last(2)
+linkedList.add_last(3)
+linkedList.add_last(4)
+linkedList.add_first(0)
+linkedList.add_last(5)
+linkedList.delete_first()
+linkedList.delete_last()
 linkedList.print_list()
