@@ -31,12 +31,13 @@ class LinkedList():
         self.index += 1
 
     def add_last(self, value):
-        if self.tail is None:
-            self.tail = Node(value)
-            self.head.next = self.tail
+        newValue = Node(value)
+        if self.head is None:
+            self.head = newValue
+            self.tail = newValue
         else:
-            self.tail.next = Node(value)
-            self.tail = self.tail.next
+            self.tail.next = newValue
+            self.tail = newValue
         self.index += 1
 
 
