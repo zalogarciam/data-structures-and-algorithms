@@ -22,24 +22,24 @@ class LinkedList():
             current = current.next
 
     def add_first(self, value):
+        new_node = Node(value)
         if self.head is None:
-            self.head = Node(value)
+            self.head = new_node
+            self.tail = new_node
         else:  
-            new_head = Node(value)
-            new_head.next = self.head
-            self.head = new_head
+            new_node.next = self.head
+            self.head = new_node
         self.index += 1
 
     def add_last(self, value):
-        newValue = Node(value)
+        new_node = Node(value)
         if self.head is None:
-            self.head = newValue
-            self.tail = newValue
+            self.head = new_node
+            self.tail = new_node
         else:
-            self.tail.next = newValue
-            self.tail = newValue
+            self.tail.next = new_node
+            self.tail = new_node
         self.index += 1
-
 
     def delete_first(self):
         self.head = self.head.next
@@ -73,15 +73,17 @@ class LinkedList():
 
 linkedList = LinkedList()
 linkedList.add_first(1)
-linkedList.add_last(2)
-linkedList.add_last(3)
-linkedList.add_last(4)
+# linkedList.add_last(2)
+# linkedList.add_last(3)
+# linkedList.add_last(4)
 linkedList.add_first(0)
-linkedList.add_last(5)
-linkedList.delete_first()
-linkedList.delete_last()
+linkedList.add_first(-1)
+
+# linkedList.add_last(5)
+# linkedList.delete_first()
+# linkedList.delete_last()
 linkedList.print_list()
-print(linkedList.contains(3))
-print(linkedList.contains(0))
-print(linkedList.indexOf(3))
-print(linkedList.indexOf(0))
+# print(linkedList.contains(3))
+# print(linkedList.contains(0))
+# print(linkedList.indexOf(3))
+# print(linkedList.indexOf(0))
