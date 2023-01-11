@@ -88,6 +88,9 @@ class LinkedList():
             current = current.next
         return None
 
+    def size(self):
+        return self.index
+
 linkedList = LinkedList()
 linkedList.add_first(1)
 linkedList.add_last(2)
@@ -104,3 +107,4 @@ print(linkedList.contains(0))
 print(linkedList.index_of(3))
 print(linkedList.index_of(0))
 linkedList.print_list()
+linkedList.size()
