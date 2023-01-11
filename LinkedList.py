@@ -47,10 +47,10 @@ class LinkedList():
         if self.head == self.tail:
             self.head = None
             self.tail = None
-            return
-        second = self.head.next
-        self.head.next = None
-        self.head = second
+        else:
+            second = self.head.next
+            self.head.next = None
+            self.head = second
         self.index -= 1
 
     def delete_last(self):
@@ -59,10 +59,10 @@ class LinkedList():
         if self.head == self.tail:
             self.head = None
             self.tail = None
-            return        
-        previous = self.get_previous(self.tail)
-        self.tail = previous   
-        previous.next = None     
+        else:     
+            previous = self.get_previous(self.tail)
+            self.tail = previous   
+            previous.next = None     
         self.index -= 1
 
     def contains(self, value):
