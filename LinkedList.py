@@ -54,6 +54,12 @@ class LinkedList():
         self.index -= 1
 
     def delete_last(self):
+        if self.is_empty():
+            raise Exception("LinkedList is empty")
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+            return        
         previous = self.get_previous(self.tail)
         self.tail = previous   
         previous.next = None     
