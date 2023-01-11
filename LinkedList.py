@@ -54,11 +54,9 @@ class LinkedList():
         self.index -= 1
 
     def delete_last(self):
-        current = self.head
-        while(current.next.next is not None):
-            current = current.next
-        current.next = None
-        self.tail = current        
+        previous = self.get_previous(self.tail)
+        self.tail = previous   
+        previous.next = None     
         self.index -= 1
 
     def contains(self, value):
@@ -77,6 +75,13 @@ class LinkedList():
     def is_empty(self):
         return self.head is None
 
+    def get_previous(self, node):
+        current = self.head
+        while current is not None:
+            if current.next == node: return current
+            current = current.next
+        return None
+
 linkedList = LinkedList()
 linkedList.add_first(1)
 linkedList.add_last(2)
@@ -85,10 +90,11 @@ linkedList.add_last(4)
 linkedList.add_first(0)
 linkedList.add_first(-1)
 linkedList.add_last(5)
-linkedList.delete_first()
-# linkedList.delete_last()
 linkedList.print_list()
+linkedList.delete_first()
+linkedList.delete_last()
 print(linkedList.contains(3))
 print(linkedList.contains(0))
 print(linkedList.index_of(3))
 print(linkedList.index_of(0))
+linkedList.print_list()
