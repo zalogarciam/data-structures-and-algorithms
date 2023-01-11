@@ -42,7 +42,15 @@ class LinkedList():
         self.index += 1
 
     def delete_first(self):
-        self.head = self.head.next
+        if self.is_empty():
+            raise Exception("LinkedList is empty")
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+            return
+        second = self.head.next
+        self.head.next = None
+        self.head = second
         self.index -= 1
 
     def delete_last(self):
@@ -77,7 +85,7 @@ linkedList.add_last(4)
 linkedList.add_first(0)
 linkedList.add_first(-1)
 linkedList.add_last(5)
-# linkedList.delete_first()
+linkedList.delete_first()
 # linkedList.delete_last()
 linkedList.print_list()
 print(linkedList.contains(3))
