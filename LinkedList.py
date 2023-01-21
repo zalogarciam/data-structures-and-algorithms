@@ -91,6 +91,14 @@ class LinkedList():
     def size(self):
         return self.index
 
+    def to_array(self):
+        array = []
+        current = self.head
+        while (current is not None):
+            array.append(current.value)
+            current = current.next
+        return array
+
 linkedList = LinkedList()
 linkedList.add_first(1)
 linkedList.add_last(2)
@@ -108,3 +116,4 @@ print(linkedList.index_of(3))
 print(linkedList.index_of(0))
 linkedList.print_list()
 linkedList.size()
+print(linkedList.to_array())
