@@ -139,12 +139,13 @@ class LinkedList():
         first = self.head
         second = self.head
 
-        while second.next.next is not None:
+        while second != self.tail and second.next != self.tail:
             second = second.next.next
             first = first.next
-            if second.next is None:
-                return first.value
-        return (first.value, first.next.value)
+        if second == self.tail:
+            return first.value
+        else:
+            return (first.value, first.next.value)
 
     def has_loop(self):
         if self.is_empty(): return
@@ -167,7 +168,7 @@ linkedList.add_last(2)
 linkedList.add_last(3)
 linkedList.add_last(4)
 linkedList.add_last(5)
-linkedList.add_last(6)
+# linkedList.add_last(6)
 linkedList.add_first(0)
 
 # linkedList.add_first(-1)
@@ -182,11 +183,11 @@ linkedList.add_first(0)
 # linkedList.size()
 # print(linkedList.to_array())
 # linkedList.reverse()
-# linkedList.print_list()
-# print(linkedList.print_middle())
+linkedList.print_list()
+print(linkedList.print_middle())
 # print(linkedList.get_kth_from_the_end(3))
 
-print(linkedList.tail.value)
-print(linkedList.head.next.next.next.value)
-linkedList.tail.next = linkedList.head.next.next.next
-print(linkedList.has_loop())
+# print(linkedList.tail.value)
+# print(linkedList.head.next.next.next.value)
+# linkedList.tail.next = linkedList.head.next.next.next
+# print(linkedList.has_loop())
