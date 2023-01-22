@@ -147,8 +147,19 @@ class LinkedList():
         return (first.value, first.next.value)
 
     def has_loop(self):
-        pass
+        if self.is_empty(): return
+        if self.head.next is None: return self.head.value
 
+        first = self.head
+        second = self.head
+        while second.next.next is not None:
+            second = second.next.next
+            first = first.next
+            if second.next is None:
+                return False
+            if second.value == first.value:
+                return True
+        return False
 
 linkedList = LinkedList()
 linkedList.add_first(1)
@@ -158,6 +169,7 @@ linkedList.add_last(4)
 linkedList.add_last(5)
 linkedList.add_last(6)
 linkedList.add_first(0)
+
 # linkedList.add_first(-1)
 # linkedList.add_last(5)
 # linkedList.print_list()
@@ -170,6 +182,11 @@ linkedList.add_first(0)
 # linkedList.size()
 # print(linkedList.to_array())
 # linkedList.reverse()
-linkedList.print_list()
+# linkedList.print_list()
 # print(linkedList.print_middle())
 # print(linkedList.get_kth_from_the_end(3))
+
+print(linkedList.tail.value)
+print(linkedList.head.next.next.next.value)
+linkedList.tail.next = linkedList.head.next.next.next
+print(linkedList.has_loop())
