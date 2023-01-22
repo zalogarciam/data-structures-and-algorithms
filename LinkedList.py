@@ -101,7 +101,7 @@ class LinkedList():
 
     def reverse(self):
         if self.is_empty(): return
-        
+
         previous = self.head
         current = self.head.next
         while current is not None:
@@ -113,23 +113,44 @@ class LinkedList():
         self.tail = self.head
         self.tail.next = None
         self.head = previous
+        
+    def get_kth_from_the_end(self, k):
+        if k == 0 or self.is_empty(): return
+        if k > self.size(): return 
+        
+        first = self.head
+        second = self.head
+        count = 0
+        while second is not None:
+            if count == k:
+                break
+            second = second.next
+            count += 1
+        while second is not None:
+            first = first.next
+            second = second.next
+        return first.value
 
 linkedList = LinkedList()
 linkedList.add_first(1)
 linkedList.add_last(2)
 linkedList.add_last(3)
 linkedList.add_last(4)
-linkedList.add_first(0)
-linkedList.add_first(-1)
 linkedList.add_last(5)
-linkedList.print_list()
-linkedList.delete_first()
-linkedList.delete_last()
-print(linkedList.contains(3))
-print(linkedList.contains(0))
-print(linkedList.index_of(3))
-print(linkedList.index_of(0))
-linkedList.size()
-print(linkedList.to_array())
-linkedList.reverse()
-linkedList.print_list()
+linkedList.add_last(6)
+linkedList.add_first(0)
+# linkedList.add_first(-1)
+# linkedList.add_last(5)
+# linkedList.print_list()
+# linkedList.delete_first()
+# linkedList.delete_last()
+# print(linkedList.contains(3))
+# print(linkedList.contains(0))
+# print(linkedList.index_of(3))
+# print(linkedList.index_of(0))
+# linkedList.size()
+# print(linkedList.to_array())
+# linkedList.reverse()
+# linkedList.print_list()
+
+print(linkedList.get_kth_from_the_end(8))
