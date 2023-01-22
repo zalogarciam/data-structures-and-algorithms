@@ -17,9 +17,11 @@ class LinkedList():
 
     def print_list(self):
         current = self.head
+        linked_list = ""
         while(current is not None):
-            print(current.value)
+            linked_list += str(current.value) + "=>"
             current = current.next
+        print(linked_list)
 
     def add_first(self, value):
         new_node = Node(value)
@@ -126,15 +128,33 @@ class LinkedList():
             first = first.next
             second = second.next
         return first.value
+    
+    def print_middle(self):
+        if self.is_empty(): return
+        if self.head.next is None: return self.head.value
+        
+        first = self.head
+        second = self.head
+
+        while second.next.next is not None:
+            second = second.next.next
+            first = first.next
+            if second.next is None:
+                return first.value
+        return (first.value, first.next.value)
+
+    def has_loop(self):
+        pass
+
 
 linkedList = LinkedList()
 linkedList.add_first(1)
-linkedList.add_last(2)
-linkedList.add_last(3)
-linkedList.add_last(4)
-linkedList.add_last(5)
-linkedList.add_last(6)
-linkedList.add_first(0)
+# linkedList.add_last(2)
+# linkedList.add_last(3)
+# linkedList.add_last(4)
+# linkedList.add_last(5)
+# linkedList.add_last(6)
+# linkedList.add_first(0)
 # linkedList.add_first(-1)
 # linkedList.add_last(5)
 # linkedList.print_list()
@@ -147,6 +167,7 @@ linkedList.add_first(0)
 # linkedList.size()
 # print(linkedList.to_array())
 # linkedList.reverse()
-# linkedList.print_list()
+linkedList.print_list()
+print(linkedList.print_middle())
 
-print(linkedList.get_kth_from_the_end(3))
+# print(linkedList.get_kth_from_the_end(3))
