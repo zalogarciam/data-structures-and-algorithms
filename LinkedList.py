@@ -19,7 +19,10 @@ class LinkedList():
         current = self.head
         linked_list = ""
         while(current is not None):
-            linked_list += str(current.value) + "=>"
+            if current.next is None:
+                linked_list += str(current.value)
+            else:
+                linked_list += str(current.value) + "=>"
             current = current.next
         print(linked_list)
 
@@ -132,7 +135,7 @@ class LinkedList():
     def print_middle(self):
         if self.is_empty(): return
         if self.head.next is None: return self.head.value
-        
+
         first = self.head
         second = self.head
 
@@ -149,12 +152,12 @@ class LinkedList():
 
 linkedList = LinkedList()
 linkedList.add_first(1)
-# linkedList.add_last(2)
-# linkedList.add_last(3)
-# linkedList.add_last(4)
-# linkedList.add_last(5)
-# linkedList.add_last(6)
-# linkedList.add_first(0)
+linkedList.add_last(2)
+linkedList.add_last(3)
+linkedList.add_last(4)
+linkedList.add_last(5)
+linkedList.add_last(6)
+linkedList.add_first(0)
 # linkedList.add_first(-1)
 # linkedList.add_last(5)
 # linkedList.print_list()
@@ -168,6 +171,5 @@ linkedList.add_first(1)
 # print(linkedList.to_array())
 # linkedList.reverse()
 linkedList.print_list()
-print(linkedList.print_middle())
-
+# print(linkedList.print_middle())
 # print(linkedList.get_kth_from_the_end(3))
