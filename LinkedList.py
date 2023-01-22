@@ -100,6 +100,8 @@ class LinkedList():
         return array
 
     def reverse(self):
+        if self.is_empty(): return
+        
         previous = self.head
         current = self.head.next
         while current is not None:
