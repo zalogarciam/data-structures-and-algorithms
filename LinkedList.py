@@ -100,18 +100,17 @@ class LinkedList():
         return array
 
     def reverse(self):
-        current = self.head
-        previous = None
-        self.tail = current
+        previous = self.head
+        current = self.head.next
         while current is not None:
             next = current.next
             current.next = previous
-            previous = current
             current = next
+            previous = current
+
+        self.tail = self.head
+        self.tail.next = None
         self.head = previous
-
-
-
 
 linkedList = LinkedList()
 linkedList.add_first(1)
