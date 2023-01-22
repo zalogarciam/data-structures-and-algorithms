@@ -115,17 +115,13 @@ class LinkedList():
         self.head = previous
         
     def get_kth_from_the_end(self, k):
-        if k == 0 or self.is_empty(): return
+        if k <= 0 or self.is_empty(): return
         if k > self.size(): return 
         
         first = self.head
         second = self.head
-        count = 0
-        while second is not None:
-            if count == k:
-                break
+        for i in range(k):
             second = second.next
-            count += 1
         while second is not None:
             first = first.next
             second = second.next
@@ -153,4 +149,4 @@ linkedList.add_first(0)
 # linkedList.reverse()
 # linkedList.print_list()
 
-print(linkedList.get_kth_from_the_end(8))
+print(linkedList.get_kth_from_the_end(3))
