@@ -1,6 +1,6 @@
-from Arrays.MyArray import MyArray
+from LinkedLists.LinkedList import LinkedList
 
-class Stack(MyArray):
+class LinkedListStack(LinkedList):
     def __init__(self):
         pass
 
@@ -12,6 +12,6 @@ class Stack(MyArray):
 
     def peek(self):
         pass
-    
+
     def is_empty(self):
         pass
