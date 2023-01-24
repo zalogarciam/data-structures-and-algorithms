@@ -1,4 +1,6 @@
-def reverse_string( string):
+def reverse_string(string):
+    if string is None:
+        raise Exception("String is none")
     stack = []
     result = ""
     for i in range(len(string)):
@@ -8,3 +10,5 @@ def reverse_string( string):
     print(result)
 
 reverse_string("abcd")
+reverse_string(None)
+reverse_string("")
