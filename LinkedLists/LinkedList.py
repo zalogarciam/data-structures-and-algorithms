@@ -59,16 +59,20 @@ class LinkedList():
         self.index -= 1
 
     def delete_last(self):
+        last = None
         if self.is_empty():
             raise Exception("LinkedList is empty")
         if self.head == self.tail:
+            last = self.head
             self.head = None
             self.tail = None
         else:     
+            last = self.tail
             previous = self.get_previous(self.tail)
             self.tail = previous   
             previous.next = None     
         self.index -= 1
+        return last.value
 
     def contains(self, value):
         return self.index_of(value) != -1
@@ -162,32 +166,32 @@ class LinkedList():
                 return True
         return False
 
-linkedList = LinkedList()
-linkedList.add_first(1)
-linkedList.add_last(2)
-linkedList.add_last(3)
-linkedList.add_last(4)
-linkedList.add_last(5)
-linkedList.add_last(6)
-linkedList.add_first(0)
+# linkedList = LinkedList()
+# linkedList.add_first(1)
+# linkedList.add_last(2)
+# linkedList.add_last(3)
+# linkedList.add_last(4)
+# linkedList.add_last(5)
+# linkedList.add_last(6)
+# linkedList.add_first(0)
 
-linkedList.add_first(-1)
-linkedList.add_last(5)
-linkedList.print_list()
-linkedList.delete_first()
-linkedList.delete_last()
-print(linkedList.contains(3))
-print(linkedList.contains(0))
-print(linkedList.index_of(3))
-print(linkedList.index_of(0))
-linkedList.size()
-print(linkedList.to_array())
-linkedList.reverse()
-linkedList.print_list()
-print(linkedList.print_middle())
-print(linkedList.get_kth_from_the_end(3))
+# linkedList.add_first(-1)
+# linkedList.add_last(5)
+# linkedList.print_list()
+# linkedList.delete_first()
+# linkedList.delete_last()
+# print(linkedList.contains(3))
+# print(linkedList.contains(0))
+# print(linkedList.index_of(3))
+# print(linkedList.index_of(0))
+# linkedList.size()
+# print(linkedList.to_array())
+# linkedList.reverse()
+# linkedList.print_list()
+# print(linkedList.print_middle())
+# print(linkedList.get_kth_from_the_end(3))
 
-print(linkedList.tail.value)
-print(linkedList.head.next.next.next.value)
-linkedList.tail.next = linkedList.head.next.next.next
-print(linkedList.has_loop())
+# print(linkedList.tail.value)
+# print(linkedList.head.next.next.next.value)
+# linkedList.tail.next = linkedList.head.next.next.next
+# print(linkedList.has_loop())
