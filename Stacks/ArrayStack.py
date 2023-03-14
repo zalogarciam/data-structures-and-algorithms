@@ -99,7 +99,7 @@ class ArrayStack(MyArray):
     def print_stack(self):
         self.printItems()
 
-stack = ArrayStack(10)
+stack = ArrayStack(4)
 stack.push(1)
 stack.push(2)
 stack.push(3)
