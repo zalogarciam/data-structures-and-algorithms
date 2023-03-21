@@ -9,7 +9,6 @@ class PointerArrayQueue():
     def enqueue(self, data):
         if self.count == self.size:
             raise Exception("Queue is full")
-        print("Index: " + str(self.count))
         self.items[self.back] = data
         self.back = (self.back + 1) % self.size
         self.count += 1
@@ -21,6 +20,10 @@ class PointerArrayQueue():
         self.count -= 1
         return item
 
+    def peek(self):
+        print("Front:" + str(self.front))
+        return self.items[self.front]
+    
     def is_empty(self):
         return self.count == 0
 
@@ -29,7 +32,7 @@ class PointerArrayQueue():
 
     def print_queue(self):
         for i in range(self.size):
-            print(self.items[i])
+            print(self.items[i], end=' -> ')
 
 queue = PointerArrayQueue(5)
 queue.enqueue(1)
@@ -41,4 +44,5 @@ queue.dequeue()
 queue.dequeue()
 queue.enqueue(12)
 queue.enqueue(14)
+print(queue.peek())
 queue.print_queue()
