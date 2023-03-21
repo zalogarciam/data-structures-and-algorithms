@@ -109,21 +109,25 @@ class QueueStack():
 
     def enqueue(self, data):
         self.stack1.insert(data)
-        while (self.stack1.is_empty() == False):
-            self.stack2.insert(self.stack1.pop())
     def dequeue(self):
-        while (self.stack1.is_empty() == False):
-            self.stack2.insert(self.stack1.pop())
+        if self.is_queue_empty():
+            raise Exception("Stack empty")
+        if self.stack2.is_empty():
+            while (self.stack1.is_empty() == False):
+                self.stack2.insert(self.stack1.pop())
         return self.stack2.pop()
     
     def peek(self):
-        return self.stack2.peek()
-    
-    def is_empty(self):
-        return self.stack2.is_empty()
+        if self.stack2.is_empty():
+            while (self.stack1.is_empty() == False):
+                self.stack2.insert(self.stack1.pop())
+        return self.stack2.peek() 
+       
+    def is_queue_empty(self):
+        return self.stack1.is_empty() and self.stack2.is_empty()
 
     def is_full(self):
-        return self.stack2.index == self.size
+        return not self.stack1.is_empty() or not self.stack2.is_empty()
 
     def print_queue(self):
         print(self.stack2.printItems())
@@ -134,7 +138,8 @@ queueStack.enqueue(5)
 queueStack.enqueue(7)
 queueStack.dequeue()
 queueStack.enqueue(9)
+queueStack.dequeue()
 queueStack.print_queue()
 print(queueStack.peek())
-print(queueStack.is_empty())
+print(queueStack.is_queue_empty())
 print(queueStack.is_full())
