@@ -14,8 +14,11 @@ class PointerArrayQueue():
         self.index += 1
 
     def dequeue(self):
+        item = self.items[self.front]
+        self.items[self.front] = None
         self.front += 1
         self.index -= 1
+        return item
 
     def is_empty(self):
         return self.index == 0
@@ -38,4 +41,5 @@ queue.enqueue(10)
 queue.enqueue(10)
 queue.enqueue(10)
 queue.dequeue()
+queue.enqueue(10)
 queue.print_queue()
