@@ -44,7 +44,7 @@ class MyArray():
 
     def printItems(self):
         for i in range(self.index):
-            print("Item "+ str(i) + ": " + str(self.items[i]))
+            print(str(self.items[i]), end= '=>')
 
     def max(self):
         max = -1
@@ -109,7 +109,8 @@ class QueueStack():
 
     def enqueue(self, data):
         self.stack1.insert(data)
-
+        while (self.stack1.is_empty() == False):
+            self.stack2.insert(self.stack1.pop())
     def dequeue(self):
         while (self.stack1.is_empty() == False):
             self.stack2.insert(self.stack1.pop())
@@ -125,13 +126,14 @@ class QueueStack():
         return self.stack2.index == self.size
 
     def print_queue(self):
-        print(self.stack2.reverse())
+        print(self.stack2.printItems())
 
 queueStack = QueueStack(10)
 queueStack.enqueue(2)
 queueStack.enqueue(5)
 queueStack.enqueue(7)
 queueStack.dequeue()
+queueStack.enqueue(9)
 queueStack.print_queue()
 print(queueStack.peek())
 print(queueStack.is_empty())
