@@ -39,11 +39,14 @@ class PriorityQueue(PriorityQueueArray):
     def __init__(self, size) -> None:
         super().__init__(size)
 
+    def enqueue(self, data):
+        self.insert(data)
+
 queue = PriorityQueue(5)
-queue.insert(3)
-queue.insert(2)
-queue.insert(5)
-queue.insert(7)
-queue.insert(1)
-queue.insert(9)
+queue.enqueue(3)
+queue.enqueue(2)
+queue.enqueue(5)
+queue.enqueue(7)
+queue.enqueue(1)
+queue.enqueue(9)
 queue.print()
