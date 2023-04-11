@@ -6,22 +6,21 @@ class PriorityQueueArray():
         self.count = 0
 
     def insert(self, data):
-        if self.is_empty():
-            self.items[self.count] = data
-        else:
-            if self.count == self.size:
-                new_items = [None] * (self.size * 2)
-                for i in range(0, self.size):
-                    new_items[i] = self.items[i]
-                self.size = self.size * 2
-                self.items = new_items
-            for i in range(self.count - 1, -1, -1):
-                if data < self.items[i]:
-                    self.items[i + 1] = self.items[i]
-                    self.items[i] = data
-                else:
-                    self.items[i + 1] = data
-                    break
+        pos = 0
+        if self.count == self.size:
+            new_items = [None] * (self.size * 2)
+            for i in range(0, self.size):
+                new_items[i] = self.items[i]
+            self.size = self.size * 2
+            self.items = new_items
+        for i in range(self.count - 1, -1, -1):
+            pos = i
+            if data < self.items[i]:
+                self.items[i + 1] = self.items[i]
+            else:
+                pos = pos + 1
+                break
+        self.items[pos] = data
         self.count += 1
 
     def remove(self):
@@ -53,16 +52,25 @@ class PriorityQueue(PriorityQueueArray):
 
 queue = PriorityQueue(5)
 queue.enqueue(3)
+queue.print()
 queue.enqueue(2)
+queue.print()
 queue.enqueue(5)
+queue.print()
 queue.enqueue(7)
+queue.print()
 queue.enqueue(1)
-queue.dequeue()
+# queue.dequeue()
 queue.print()
 queue.enqueue(9)
+queue.print()
 queue.enqueue(0)
+queue.print()
 queue.enqueue(4)
+queue.print()
 queue.enqueue(10)
+queue.print()
+
 queue.enqueue(6)
-queue.dequeue()
+# queue.dequeue()
 queue.print()
