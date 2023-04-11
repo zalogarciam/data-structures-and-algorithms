@@ -29,3 +29,7 @@ def first_first_repeated_character(string):
                 return i
 
 print(first_first_repeated_character('green apple'))
+
+def hash(number):
+    return number % 100
+
