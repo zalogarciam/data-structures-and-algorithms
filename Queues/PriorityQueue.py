@@ -7,12 +7,14 @@ class PriorityQueueArray():
 
     def insert(self, data):
         pos = 0
+
         if self.count == self.size:
             new_items = [None] * (self.size * 2)
             for i in range(0, self.size):
                 new_items[i] = self.items[i]
             self.size = self.size * 2
             self.items = new_items
+
         for i in range(self.count - 1, -1, -1):
             pos = i
             if data < self.items[i]:
@@ -20,6 +22,7 @@ class PriorityQueueArray():
             else:
                 pos = pos + 1
                 break
+            
         self.items[pos] = data
         self.count += 1
 
