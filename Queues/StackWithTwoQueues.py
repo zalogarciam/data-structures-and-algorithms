@@ -145,5 +145,8 @@ stack.push(1)
 stack.push(5)
 stack.push(7)
 print(stack.pop())
+print(stack.peek())
+print(stack.size())
+print(stack.is_empty())
 stack.print()
 
