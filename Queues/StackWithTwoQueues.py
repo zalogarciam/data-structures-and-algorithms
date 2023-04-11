@@ -100,24 +100,50 @@ class ArrayQueue(MyArray):
 
 
 class StackWithTwoQueues():
-    def __init__(self) -> None:
-        pass
+    def __init__(self, size):
+        self.q1 = ArrayQueue(size)
+        self.q2 = ArrayQueue(size)
+        self.count = 0
 
     def push(self, data):
-        pass
+        if self.q1.is_empty():
+            self.q1.add(data)
+        else:
+            for i in range (self.q1.index):
+                self.q2.add(self.q1.remove())
+            self.q1.add(data)
 
-    def pop():
-        pass
+            for i in range(self.q2.index):
+                self.q1.add(self.q2.remove())
+        self.count +=1
+  
 
-    def peek():
-        pass
+    def pop(self):
+        self.count -= 1
+        return self.q1.remove()
 
-    def size():
-        pass
+    def peek(self):
+        return self.q1.peek()
 
-    def is_empty():
-        pass
+    def size(self):
+        return self.count
 
-    
+    def is_empty(self):
+        return self.count == 0
 
+    def print(self):
+        print("Q1")
+        self.q1.print_queue()
+        print("\n\nQ2")
+        self.q2.print_queue()
+
+
+stack = StackWithTwoQueues(5)
+stack.push(3)
+stack.push(4)
+stack.push(1)
+stack.push(5)
+stack.push(7)
+print(stack.pop())
+stack.print()
 
