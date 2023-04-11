@@ -98,15 +98,23 @@ class ArrayQueue(MyArray):
 
     def print_queue(self):
         self.printItems()
+        print('\n')
 
     def reverse(self, k):
-        pass
-
+        k_values = []
+        index = 0
+        for i in range(k):
+            k_values.append(self.items[i])
+        for i in range(k - 1, -1, -1):
+            self.items[index] = k_values[i]
+            index += 1
 queue = ArrayQueue(5)
 queue.add(10)
 queue.add(20)
 queue.add(30)
 queue.add(40)
 queue.add(50)
+queue.print_queue()
+queue.reverse(3)
 queue.print_queue()
 
