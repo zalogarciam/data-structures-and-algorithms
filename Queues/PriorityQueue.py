@@ -24,6 +24,12 @@ class PriorityQueueArray():
                     break
         self.count += 1
 
+    def remove(self):
+        if self.is_empty():
+            raise Exception('Queue is empty')
+        self.items[self.count - 1] = None
+        self.count -= 1
+
     def is_empty(self):
         return self.count == 0
     
@@ -42,15 +48,21 @@ class PriorityQueue(PriorityQueueArray):
     def enqueue(self, data):
         self.insert(data)
 
+    def dequeue(self):
+        self.remove()
+
 queue = PriorityQueue(5)
 queue.enqueue(3)
 queue.enqueue(2)
 queue.enqueue(5)
 queue.enqueue(7)
 queue.enqueue(1)
+queue.dequeue()
+queue.print()
 queue.enqueue(9)
 queue.enqueue(0)
 queue.enqueue(4)
 queue.enqueue(10)
 queue.enqueue(6)
+queue.dequeue()
 queue.print()
