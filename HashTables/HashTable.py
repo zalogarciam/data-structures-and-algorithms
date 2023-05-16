@@ -180,6 +180,9 @@ class HashTable():
             self.items.append(key_value)
             self.count += 1
     
+    def hash(self, key):
+        return key % len(self.items)
+
     def exist(self, key):
         for item in self.items:
             if item.key == key: return True
