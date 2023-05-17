@@ -199,11 +199,18 @@ class HashTable():
         return None
 
     def remove(self , key):
-        for item in self.items:
-            if item.key == key: 
-                self.items.remove(item)
-                return True
-        return False
+        hash_value = self.hash(key)
+        linked_list = self.items[hash_value]
+        if linked_list.size() > 1:
+            head = linked_list.head
+            while head is not None:
+                key_value = head.value
+                if key_value.key == key:
+                    #TODO delete key when is found
+                    pass
+                head = head.next
+        else:
+            self.items[hash_value] = None
 
     def print(self):
         for i in range(self.size):
