@@ -13,9 +13,9 @@ class LinkedList():
         linked_list = ""
         while(current is not None):
             if current.next is None:
-                linked_list += str(current.value)
+                linked_list += str(current.value.value)
             else:
-                linked_list += str(current.value) + "=>"
+                linked_list += str(current.value.value) + "=>"
             current = current.next
         return linked_list
 
@@ -161,40 +161,41 @@ class LinkedList():
 
 
 class KeyValuePair():
-    def __init__(self) -> None:
-        self.key = None        
-        self.value = LinkedList()
+    def __init__(self, key, value) -> None:
+        self.key = key        
+        self.value = value
 class HashTable():
-    def __init__(self) -> None:
-        self.items = []
+    def __init__(self, size
+    ) -> None:
+        self.items = [None] * size
         self.count = 0
+        self.size = size
 
     def put(self, key, value):
-        if (self.exist(key)):
-            index = self.index_of(key)
-            self.items[index].value.add_last(value)
-        else:
-            key_value = KeyValuePair()
-            key_value.key = key
-            key_value.value.add_last(value)
-            self.items.append(key_value)
+        if (self.count < self.size):
+            hash_value = self.hash(key)
+            key_value = KeyValuePair(key, value)
+            if (self.items[hash_value] is None):
+                linked_list = LinkedList()
+                linked_list.add_last(key_value)
+                self.items[hash_value] = linked_list
+            else:
+                self.items[hash_value].add_last(key_value)
             self.count += 1
+        else:
+            raise Exception("Hashtable is full")
     
     def hash(self, key):
-        return key % len(self.items)
-
-    def exist(self, key):
-        for item in self.items:
-            if item.key == key: return True
-        return False
-
-    def index_of(self, key):
-        for index in range(len(self.items)):
-            if self.items[index].key == key: return index
-
+        return key % self.size
+    
     def get(self, key):
-        for item in self.items:
-            if item.key == key: return item.value
+        hash_value = self.hash(key)
+        head = self.items[hash_value].head
+        while head is not None:
+            key_value = head.value
+            if key_value.key == key:
+                return key_value.value
+            head = head.next
         return None
 
     def remove(self , key):
@@ -205,20 +206,23 @@ class HashTable():
         return False
 
     def print(self):
-        for item in self.items:
-            print("Key: " + str(item.key) + " Value: " + item.value.print_list(), end="\n")
+        for i in range(self.size):
+            if self.items[i] is not None:
+                print(self.items[i].print_list(), end="\n")
 
-hashTable = HashTable()
-hashTable.put(0, "Gonzalo")
-hashTable.put(1, "Enrique")
-hashTable.put(2, "Garcia")
-hashTable.put(3, "Martinez")
-hashTable.put(2, "Juan")
-print(hashTable.get(3).print_list())
-print(hashTable.get(2).print_list())
+hashTable = HashTable(5)
+hashTable.put(1, "Gonzalo") 
+hashTable.put(2, "Enrique")
+hashTable.put(3, "Garcia")
+hashTable.put(4, "Martinez")
+hashTable.put(6, "Juan")
+
 hashTable.print()
 hashTable.remove(2)
+hashTable.remove(1)
 hashTable.print()
+print(hashTable.get(1))
+print(hashTable.get(6))
 
 def find_first_non_repeated_character(string):
     dict = {}
