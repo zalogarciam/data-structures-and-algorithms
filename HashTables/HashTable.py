@@ -202,17 +202,30 @@ class HashTable():
         hash_value = self.hash(key)
         linked_list = self.items[hash_value]
         if linked_list.size() > 1:
-            head = linked_list.head
-            while head is not None:
-                key_value = head.value
+            # Check if head is key
+            if (linked_list.head.value.key == key):
+                linked_list.delete_first()
+                return
+
+            # Check if its at the end
+            if (linked_list.tail.value.key == key):
+                linked_list.delete_last()
+                return
+
+            # Check if it is somewhere in the middle
+            current = linked_list.head
+            while current is not None:
+                key_value = current.value
                 if key_value.key == key:
-                    #TODO delete key when is found
-                    pass
-                head = head.next
+                    previous = linked_list.get_previous(current)
+                    previous.next = current.next
+                    return
+                current = current.next
         else:
             self.items[hash_value] = None
 
     def print(self):
+        print("=========PRINT=========")
         for i in range(self.size):
             if self.items[i] is not None:
                 print(self.items[i].print_list(), end="\n")
@@ -228,6 +241,7 @@ hashTable.print()
 hashTable.remove(2)
 hashTable.remove(1)
 hashTable.print()
+print("=========GET=========")
 print(hashTable.get(1))
 print(hashTable.get(6))
 
