@@ -234,6 +234,7 @@ class HashTable():
                     previous.next = current.next
                     return
                 current = current.next
+            raise Exception("Key does not exist")
         else:
             self.items[hash_value] = None
 
@@ -243,21 +244,21 @@ class HashTable():
             if self.items[i] is not None:
                 print(self.items[i].print_list(), end="\n")
 
-hashTable = HashTable(5)
-hashTable.put(1, "Gonzalo") 
-hashTable.put(3, "Garcia")
-hashTable.put(4, "Martinez")
-hashTable.put(6, "Juan")
-hashTable.put(6, "Test")
+# hashTable = HashTable(5)
+# hashTable.put(1, "Gonzalo") 
+# hashTable.put(3, "Garcia")
+# hashTable.put(4, "Martinez")
+# hashTable.put(6, "Juan")
+# hashTable.put(6, "Test")
 
-hashTable.print()
-hashTable.remove(3)
-hashTable.remove(1)
-hashTable.print()
-print("=========GET=========")
-print(hashTable.get(1))
-print(hashTable.get(6))
-print(hashTable.get(2))
+# hashTable.print()
+# hashTable.remove(3)
+# hashTable.remove(1)
+# hashTable.print()
+# print("=========GET=========")
+# print(hashTable.get(1))
+# print(hashTable.get(6))
+# print(hashTable.get(2))
 
 def find_first_non_repeated_character(string):
     dict = {}
@@ -291,4 +292,19 @@ def first_first_repeated_character(string):
 def hash(number):
     return number % 100
 
+def most_frequent(array):
+    dict = {}
+    for item in array:
+        if item in dict:
+            dict[item] += 1
+        else:
+            dict[item] = 1
+    max = -1
+    result = 0
+    for key in dict:
+        if dict[key] > max:
+            max = dict[key]
+            result = key
+    print(result)
 
+most_frequent([1,2,2,3,3,3,4])
