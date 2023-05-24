@@ -322,5 +322,17 @@ def count_pairs_with_diff(nums, k):
     
     print(count)
 
-
 count_pairs_with_diff([1, 7, 5, 9, 2, 12, 3], 2)
+
+def two_sum(array, target):
+    dict = {}
+    for index, item in enumerate(array):
+        dict[item] = index
+
+    for index, item in enumerate(array):
+        if target - item in array:
+            print (dict[item], dict[target - item])
+            return
+    
+
+two_sum([2, 7, 11, 15], 9)
