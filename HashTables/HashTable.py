@@ -198,7 +198,10 @@ class HashTable():
     
     def get(self, key):
         hash_value = self.hash(key)
+        if self.items[hash_value] is None:
+            raise Exception("Key does not exist")
         head = self.items[hash_value].head
+      
         while head is not None:
             key_value = head.value
             if key_value.key == key:
@@ -254,6 +257,7 @@ hashTable.print()
 print("=========GET=========")
 print(hashTable.get(1))
 print(hashTable.get(6))
+print(hashTable.get(2))
 
 def find_first_non_repeated_character(string):
     dict = {}
