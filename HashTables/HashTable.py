@@ -308,3 +308,19 @@ def most_frequent(array):
     print(result)
 
 most_frequent([1,2,2,3,3,3,4])
+
+
+def count_pairs_with_diff(nums, k):
+    num_dict = {}
+    count = 0
+    
+    for num in nums:
+        num_dict[num] = num_dict.get(num, 0) + 1
+    for num in num_dict:
+        if num + k in num_dict:
+            count += 1
+    
+    print(count)
+
+
+count_pairs_with_diff([1, 7, 5, 9, 2, 12, 3], 2)
