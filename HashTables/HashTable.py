@@ -180,6 +180,14 @@ class HashTable():
                 linked_list.add_last(key_value)
                 self.items[hash_value] = linked_list
             else:
+                current = self.items[hash_value].head
+                while current is not None:
+                    print(current.value.key, key)
+                    if current.value.key == key:
+                        current.value.value = value
+                        return
+                    current = current.next
+
                 self.items[hash_value].add_last(key_value)
             self.count += 1
         else:
@@ -201,6 +209,8 @@ class HashTable():
     def remove(self , key):
         hash_value = self.hash(key)
         linked_list = self.items[hash_value]
+        if linked_list is None:
+            raise Exception("Key does not exist")
         if linked_list.size() > 1:
             # Check if head is key
             if (linked_list.head.value.key == key):
@@ -232,13 +242,13 @@ class HashTable():
 
 hashTable = HashTable(5)
 hashTable.put(1, "Gonzalo") 
-hashTable.put(2, "Enrique")
 hashTable.put(3, "Garcia")
 hashTable.put(4, "Martinez")
 hashTable.put(6, "Juan")
+hashTable.put(6, "Test")
 
 hashTable.print()
-hashTable.remove(2)
+hashTable.remove(3)
 hashTable.remove(1)
 hashTable.print()
 print("=========GET=========")
