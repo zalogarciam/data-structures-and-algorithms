@@ -307,8 +307,7 @@ def most_frequent(array):
             result = key
     print(result)
 
-most_frequent([1,2,2,3,3,3,4])
-
+# most_frequent([1,2,2,3,3,3,4])
 
 def count_pairs_with_diff(nums, k):
     num_dict = {}
@@ -322,7 +321,7 @@ def count_pairs_with_diff(nums, k):
     
     print(count)
 
-count_pairs_with_diff([1, 7, 5, 9, 2, 12, 3], 2)
+# count_pairs_with_diff([1, 7, 5, 9, 2, 12, 3], 2)
 
 def two_sum(array, target):
     dict = {}
@@ -335,4 +334,81 @@ def two_sum(array, target):
             return
     
 
-two_sum([2, 7, 11, 15], 9)
+# two_sum([2, 7, 11, 15], 9)
+
+class HashTableLinearProbing:
+    def __init__(self, size
+    ) -> None:
+        self.items = [None] * size
+        self.count = 0
+        self.size = size
+
+    def put(self, key, value):
+        index = self.hash(key)
+        key_value = KeyValuePair(key, value)
+        if self.items[index] is None:
+            self.items[index] = key_value
+        else:
+            old_index = index
+            while True:
+                if index == self.size:
+                    index = 0
+                if self.items[index] is None:
+                    self.items[index] = key_value
+                    return
+                index += 1
+                if index == old_index:
+                    raise Exception("Hashtable is full")
+
+
+    def get(self, key):
+        index = self.hash(key)
+        old_index = index
+        while(True):
+            if self.items[index].key == key:
+                if self.items[index].value == "TOMBSTONE":
+                    return None
+                return  self.items[index].value
+            index +=1
+            if index == self.size:
+                index = 0
+            if index == old_index:
+                    raise Exception("Item not found")
+
+    def remove(self, key):
+        index = self.hash(key)
+        while (True):
+            if self.items[index].key == key:
+                self.items[index].value = "TOMBSTONE" 
+                return  
+            index+=1 
+
+    def size(self):
+        return self.size
+    
+    def hash(self, number):
+        return number % self.size
+    
+    def print(self):
+        for item in self.items:
+            print(item.value, end=" ")
+    
+hash_probing = HashTableLinearProbing(5)
+hash_probing.put(6, 'A')
+hash_probing.put(11, 'C')
+hash_probing.put(8, 'B')
+hash_probing.put(16, 'D')
+hash_probing.put(21, 'E')
+# hash_probing.put(26, 'F')
+hash_probing.print()
+print()
+print(hash_probing.get(8))
+hash_probing.remove(11)
+hash_probing.print()
+print()
+print("======GET======")
+print(hash_probing.get(21))
+print(hash_probing.get(1))
+
+
+
