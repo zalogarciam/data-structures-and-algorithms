@@ -33,14 +33,14 @@ class Tree():
             return True
         
         current = self.root
-        while (True):
-            if current is None: return False
+        while (current is not None):
             if current.data == data:
                 return True
             if (current.data > data):
                 current = current.left
             else:
                 current = current.right
+        return False
            
     def in_order(self):
          if self.root != None:
