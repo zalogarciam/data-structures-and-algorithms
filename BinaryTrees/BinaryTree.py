@@ -20,16 +20,28 @@ class Tree():
                 if current.left is None:
                     current.left = Node(data)
                     break
-                current = self.root.left
+                current = current.left
 
             else:
                 if current.right is None:
                     current.right = Node(data)
                     break
-                current = self.root.right
+                current = current.right
 
+    def find(self, data):
+        if self.root.data == data:
+            return True
         
-        
+        current = self.root
+        while (True):
+            if current is None: return False
+            if current.data == data:
+                return True
+            if (current.data > data):
+                current = current.left
+            else:
+                current = current.right
+           
     def in_order(self):
          if self.root != None:
             self.in_order(self.root.left)
@@ -41,14 +53,14 @@ tree = Tree()
 tree.insert(10)
 tree.insert(5)
 tree.insert(15)
-# tree.insert(6)
-# tree.insert(1)
-# tree.insert(8)
-# tree.insert(12)
-# tree.insert(18)
-# tree.insert(17)
-# print(root.find(6))
-# print(root.find(7))
+tree.insert(6)
+tree.insert(1)
+tree.insert(8)
+tree.insert(12)
+tree.insert(18)
+tree.insert(17)
+print(tree.find(6))
+print(tree.find(7))
 
 # tree.in_order()
 
