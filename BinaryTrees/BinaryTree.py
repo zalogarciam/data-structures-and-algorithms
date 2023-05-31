@@ -4,46 +4,51 @@ class Node():
         self.left = None
         self.right = None
 
-    def insert(self, data):
-        if data < self.data:
-            if self.left is None:
-                self.left = Node(data)
-            else:
-                self.left.insert(data)
-        else:
-            if self.right is None:
-                self.right = Node(data)
-            else:
-                self.right.insert(data)
-
-    def find(self, data):
-        if data == self.data:
-            return True
-        if data < self.data:
-            if self.left is not None:
-                return self.left.find(data)
-        else:
-            if self.right is not None:
-                return self.right.find(data)
-        return False
+class Tree():
     
-    def print(self, node, level = 0):
-        if node.right is not None: self.print(node.right, level + 1)
-        print(' ' * 4 * level + '-> ' + str(node.data))
-        if node.left is not None: self.print(node.left, level + 1)
+    def __init__(self) -> None:
+        self.root = None
+
+    def insert(self, data):
+        if self.root is None:
+            self.root = Node(data)
+            return
+        
+        current = self.root
+        while (True):
+            if (current.data > data):
+                if current.left is None:
+                    current.left = Node(data)
+                    break
+                current = self.root.left
+
+            else:
+                if current.right is None:
+                    current.right = Node(data)
+                    break
+                current = self.root.right
+
+        
+        
+    def in_order(self):
+         if self.root != None:
+            self.in_order(self.root.left)
+            print(self.root.data)
+            self.in_order(self.root.right)
 
 
-root = Node(10)
-root.insert(5)
-root.insert(15)
-root.insert(6)
-root.insert(1)
-root.insert(8)
-root.insert(12)
-root.insert(18)
-root.insert(17)
-print(root.find(6))
-print(root.find(7))
+tree = Tree()
+tree.insert(10)
+tree.insert(5)
+tree.insert(15)
+# tree.insert(6)
+# tree.insert(1)
+# tree.insert(8)
+# tree.insert(12)
+# tree.insert(18)
+# tree.insert(17)
+# print(root.find(6))
+# print(root.find(7))
 
-root.print(root)
+# tree.in_order()
 
