@@ -42,12 +42,22 @@ class Tree():
                 current = current.right
         return False
            
-    def in_order(self):
-         if self.root != None:
-            self.in_order(self.root.left)
-            print(self.root.data)
-            self.in_order(self.root.right)
+    def in_order(self, root):
+         if root != None:
+            self.in_order(root.left)
+            print(root.data)
+            self.in_order(root.right)
 
+    def pre_order(self, root):
+        if root is not None:
+            self.pre_order(root.left)
+            self.pre_order(root.right)
+
+    def pos_order(self, root):
+        if root is not None:
+            self.pre_order(root.left)
+            self.pre_order(root.right)
+            print(root.data)
 
 tree = Tree()
 tree.insert(10)
@@ -62,7 +72,9 @@ tree.insert(17)
 print(tree.find(6))
 print(tree.find(7))
 
-tree.in_order()
+tree.pre_order(tree.root)
+tree.in_order(tree.root)
+tree.pos_order(tree.root)
 
 #Exercise
 # BFS: 20 10 30 6 14 24 3 8 26
