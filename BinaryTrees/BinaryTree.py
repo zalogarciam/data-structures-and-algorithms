@@ -62,5 +62,10 @@ tree.insert(17)
 print(tree.find(6))
 print(tree.find(7))
 
-# tree.in_order()
+tree.in_order()
 
+#Exercise
+# BFS: 20 10 30 6 14 24 3 8 26
+# PRE (ROOT, LEFT, RIGHT): 20 10 6 3 8 14 30 24 26
+# IN (LEFT, ROOT, RIGHT):  3 6 8 10 14 20 24 26 30
+# POS (LEFT, RIGHT, ROOT): 3 8 6 14 10 26 24 30 20
