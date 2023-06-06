@@ -50,6 +50,7 @@ class Tree():
 
     def pre_order(self, root):
         if root is not None:
+            print(root.data)
             self.pre_order(root.left)
             self.pre_order(root.right)
 
