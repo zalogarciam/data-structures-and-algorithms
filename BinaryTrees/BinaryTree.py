@@ -60,6 +60,11 @@ class Tree():
             self.pre_order(root.right)
             print(root.data)
 
+    def height(self, root):
+        if root is None: return -1
+        if root.left is None and root.right is  None: return 0
+        return 1 + max(self.height(root.left), self.height(root.right))
+
 tree = Tree()
 tree.insert(10)
 tree.insert(5)
@@ -73,9 +78,11 @@ tree.insert(17)
 print(tree.find(6))
 print(tree.find(7))
 
-tree.pre_order(tree.root)
-tree.in_order(tree.root)
-tree.pos_order(tree.root)
+# tree.pre_order(tree.root)
+# tree.in_order(tree.root)
+# tree.pos_order(tree.root)
+print('Height: ', tree.height(tree.root))
+
 
 #Exercise
 # BFS: 20 10 30 6 14 24 3 8 26
