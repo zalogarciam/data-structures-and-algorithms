@@ -174,8 +174,18 @@ class Tree():
             current = current.right
         return last.data
 
-    def contains(self):
-        pass
+    def contains(self, root, data):
+        current = root
+
+        while current is not None:
+            if current.data == data:
+                return True
+            if data < current.data:
+                current = current.left
+            else:
+                current = current.right
+        return False
+
 
     def are_siblings(self):
         pass
@@ -236,9 +246,10 @@ tree3.in_order_level(tree3.root)
 print(tree3.height(tree3.root))
 print(tree3.size_(tree3.root))
 
-print("Count Leaves")
-print(tree3.count_leaves(tree3.root))
+print('Leaves', tree3.count_leaves(tree3.root))
 print('Max: ', tree3.max_value(tree3.root))
+print('Contains: ', tree3.contains(tree3.root, 8))
+print('Contains: ', tree3.contains(tree3.root, 11))
 
 # tree3.swap_root()
 # print(tree.validate_bst(tree3.root, -float('inf'), float('inf')))
