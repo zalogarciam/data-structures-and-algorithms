@@ -146,8 +146,9 @@ class Tree():
                 queue.append(current.right)
         print(visited)
 
-    def size(self):
-        pass
+    def size(self, root):
+        if root is None: return 0
+        return 1 + max(self.size(root.left), self.size(root.right))
 
     def count_leaves(self):
         pass
@@ -159,6 +160,9 @@ class Tree():
         pass
 
     def are_siblings(self):
+        pass
+
+    def get_ancestors(self):
         pass
 
 # tree = Tree()
@@ -210,7 +214,10 @@ tree3.insert(21)
 tree3.insert(4)
 tree3.insert(3)
 tree3.insert(8)
-# tree3.in_order_level(tree3.root)
+tree3.in_order_level(tree3.root)
+print(tree3.height(tree3.root))
+print(tree3.size(tree3.root))
+
 # tree3.swap_root()
 # print(tree.validate_bst(tree3.root, -float('inf'), float('inf')))
 # print(tree3.validate_bst(tree3.root, -float('inf'), float('inf')))
