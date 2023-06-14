@@ -110,13 +110,41 @@ class Tree():
         if root is None: return True
         return self.nodes_at_k_distance(root.left, k - 1) and self.nodes_at_k_distance(root.right, k -1)
     
-    def print_nodes_at_distance(self, root, k):
+    def get_nodes_at_distance(self, root, k):
+        list = []
+        self.print_nodes_at_distance(root, k, list)
+        return list
+
+    def print_nodes_at_distance(self, root, k, list):
         if root is None: return
         if k == 0: 
-            print(root.data) 
+            list.append(root.data)
             return
-        self.print_nodes_at_distance(root.left, k -1)
-        self.print_nodes_at_distance(root.right, k -1)
+        self.print_nodes_at_distance(root.left, k -1, list)
+        self.print_nodes_at_distance(root.right, k -1, list)
+
+    def traverse_level_order(self):
+        for i in range(self.height(self.root) + 1):
+            list = self.get_nodes_at_distance(self.root, i)
+            for i in list:
+                print(i)
+
+    def bfs(self, root):
+        if root is None:
+            return
+        queue = [root]
+        visited = []
+        while len(queue) > 0:
+            
+            current = queue.pop(0)
+            if current.data not in visited:
+                visited.append(current.data)
+            if current.left is not None:
+                queue.append(current.left)
+
+            if current.right is not None:
+                queue.append(current.right)
+        print(visited)
 
 tree = Tree()
 tree.insert(10)
@@ -171,5 +199,8 @@ tree3.in_order_level(tree3.root)
 # tree3.swap_root()
 # print(tree.validate_bst(tree3.root, -float('inf'), float('inf')))
 # print(tree3.validate_bst(tree3.root, -float('inf'), float('inf')))
-tree3.nodes_at_k_distance(tree3.root, 3)
-tree3.print_nodes_at_distance(tree3.root, 3)
+# tree3.nodes_at_k_distance(tree3.root, 3)
+# tree3.print_nodes_at_distance(tree3.root, 3)
+# print(tree3.get_nodes_at_distance(tree3.root, 3))
+# tree3.traverse_level_order()
+tree3.bfs(tree3.root)
