@@ -150,11 +150,29 @@ class Tree():
         if root is None: return 0
         return 1 + max(self.size(root.left), self.size(root.right))
 
-    def count_leaves(self):
-        pass
+    def size_(self, root):
+        if (root == None):
+            return 0
 
-    def max(self):
-        pass
+        if root.right is None and root.left is None:
+            return 1
+
+        return 1 + self.size_(root.left) + self.size_(root.right)
+  
+    def count_leaves(self, root):
+        if root is None: return 0
+        if root.left is None and root.right is None:
+            return 1
+        return self.count_leaves(root.left) + self.count_leaves(root.right)
+        
+    def max_value(self, root):
+        if root is None: return
+        current = root
+        last = None
+        while current is not None:
+            last = current
+            current = current.right
+        return last.data
 
     def contains(self):
         pass
@@ -216,7 +234,11 @@ tree3.insert(3)
 tree3.insert(8)
 tree3.in_order_level(tree3.root)
 print(tree3.height(tree3.root))
-print(tree3.size(tree3.root))
+print(tree3.size_(tree3.root))
+
+print("Count Leaves")
+print(tree3.count_leaves(tree3.root))
+print('Max: ', tree3.max_value(tree3.root))
 
 # tree3.swap_root()
 # print(tree.validate_bst(tree3.root, -float('inf'), float('inf')))
