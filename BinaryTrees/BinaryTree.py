@@ -62,8 +62,25 @@ class Tree():
 
     def height(self, root):
         if root is None: return -1
-        if root.left is None and root.right is  None: return 0
         return 1 + max(self.height(root.left), self.height(root.right))
+    
+    def min_value(self, root):
+        if root is None: 
+            return float('inf')
+
+        left = self.min_value(root.left)
+        right = self.min_value(root.right)
+        return min(left, right, root.data)
+    
+    def min_bst(self, root):
+        if root is None: return
+        current = root
+        last = None
+        while (current is not None):
+            last = current
+            current = current.left
+        return last.data
+
 
 tree = Tree()
 tree.insert(10)
@@ -82,6 +99,8 @@ print(tree.find(7))
 # tree.in_order(tree.root)
 # tree.pos_order(tree.root)
 print('Height: ', tree.height(tree.root))
+print('Min: ', tree.min_value(tree.root))
+print('Min BST: ', tree.min_bst(tree.root))
 
 
 #Exercise
