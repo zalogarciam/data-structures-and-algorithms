@@ -146,16 +146,31 @@ class Tree():
                 queue.append(current.right)
         print(visited)
 
-tree = Tree()
-tree.insert(10)
-tree.insert(5)
-tree.insert(15)
-tree.insert(6)
-tree.insert(1)
-tree.insert(8)
-tree.insert(12)
-tree.insert(18)
-tree.insert(17)
+    def size(self):
+        pass
+
+    def count_leaves(self):
+        pass
+
+    def max(self):
+        pass
+
+    def contains(self):
+        pass
+
+    def are_siblings(self):
+        pass
+
+# tree = Tree()
+# tree.insert(10)
+# tree.insert(5)
+# tree.insert(15)
+# tree.insert(6)
+# tree.insert(1)
+# tree.insert(8)
+# tree.insert(12)
+# tree.insert(18)
+# tree.insert(17)
 
 # print(tree.find(6))
 # print(tree.find(7))
@@ -173,16 +188,16 @@ tree.insert(17)
 # IN (LEFT, ROOT, RIGHT):  3 6 8 10 14 20 24 26 30
 # POS (LEFT, RIGHT, ROOT): 3 8 6 14 10 26 24 30 20
 
-tree2 = Tree()
-tree2.insert(10)
-tree2.insert(5)
-tree2.insert(15)
-tree2.insert(6)
-tree2.insert(1)
-tree2.insert(8)
-tree2.insert(12)
-tree2.insert(18)
-tree2.insert(17)
+# tree2 = Tree()
+# tree2.insert(10)
+# tree2.insert(5)
+# tree2.insert(15)
+# tree2.insert(6)
+# tree2.insert(1)
+# tree2.insert(8)
+# tree2.insert(12)
+# tree2.insert(18)
+# tree2.insert(17)
 
 # print(tree2.equals(tree.root, tree2.root))
 
@@ -195,7 +210,7 @@ tree3.insert(21)
 tree3.insert(4)
 tree3.insert(3)
 tree3.insert(8)
-tree3.in_order_level(tree3.root)
+# tree3.in_order_level(tree3.root)
 # tree3.swap_root()
 # print(tree.validate_bst(tree3.root, -float('inf'), float('inf')))
 # print(tree3.validate_bst(tree3.root, -float('inf'), float('inf')))
@@ -203,4 +218,4 @@ tree3.in_order_level(tree3.root)
 # tree3.print_nodes_at_distance(tree3.root, 3)
 # print(tree3.get_nodes_at_distance(tree3.root, 3))
 # tree3.traverse_level_order()
-tree3.bfs(tree3.root)
+# tree3.bfs(tree3.root)
