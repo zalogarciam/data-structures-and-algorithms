@@ -187,8 +187,15 @@ class Tree():
         return False
 
 
-    def are_siblings(self):
-        pass
+    def are_siblings(self, root, a, b):
+        if root is None: 
+            return False
+     
+        siblings = False
+        if root.left is not None and root.right is not None:
+            siblings = (root.left.data == a and root.right.data == b) or (root.left.data == b and root.right.data == a)
+        
+        return siblings or self.are_siblings(root.left,a , b) or self.are_siblings(root.right,a ,b)
 
     def get_ancestors(self):
         pass
@@ -250,6 +257,8 @@ print('Leaves', tree3.count_leaves(tree3.root))
 print('Max: ', tree3.max_value(tree3.root))
 print('Contains: ', tree3.contains(tree3.root, 8))
 print('Contains: ', tree3.contains(tree3.root, 11))
+print('Siblings: ', tree3.are_siblings(tree3.root, 8, 4))
+print('Siblings: ', tree3.are_siblings(tree3.root, 6, 21))
 
 # tree3.swap_root()
 # print(tree.validate_bst(tree3.root, -float('inf'), float('inf')))
