@@ -3,6 +3,7 @@ class Node():
         self.data = data
         self.left = None
         self.right = None
+        self.height = None
 
 class AVLTree:
     def __init__(self) -> None:
@@ -19,12 +20,23 @@ class AVLTree:
             root.left = self._insert(data, root.left)
         else:
             root.right = self._insert(data, root.right)
-        return root
 
+
+        root.height = max(self.height(root.left), self.height(root.right)) + 1
+
+        return root
+    
+    def height(self, node):
+        if node is None:
+            return -1
+        left_height = self.height(node.left) if node.left else -1
+        right_height = self.height(node.right) if node.right else -1
+        return max(left_height, right_height) + 1
+    
     def in_order_level(self, root, level = 1):
          if root != None:
             self.in_order_level(root.left, level + 1)
-            print(level * 4 * "-" + str(root.data))
+            print(level * 4 * "-" + str(root.data) + " ("+str(root.height)+")" )
             self.in_order_level(root.right, level + 1)
 # 1 2 3 4 5
 # L L
