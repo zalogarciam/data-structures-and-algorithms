@@ -27,7 +27,7 @@ class AVLTree:
         balance = self.balance_factor(root)
         if self.left_heavy(root):
             print("Left heavy")
-        elif self.left_heavy(root):
+        elif self.right_heavy(root):
             print("Right heavy")
         return root
     
