@@ -8,23 +8,18 @@ class AVLTree:
     def __init__(self) -> None:
         self.root = None
 
-    def insert(self, data, root):
-        if self.root is None:
-            self.root = Node(data)
-            return
-        
-        current = root
-        if (current.data > data):
-            if current.left is None:
-                current.left = Node(data)
-                return
-            self.insert(data, root.left)
+    def insert(self, data):
+        self.root = self._insert(data, self.root)
 
+    def _insert(self, data, root):
+        if root is None:
+            return Node(data)
+        
+        if (root.data > data):
+            root.left = self._insert(data, root.left)
         else:
-            if current.right is None:
-                current.right = Node(data)
-                return
-            self.insert(data, root.right)
+            root.right = self._insert(data, root.right)
+        return root
 
     def in_order_level(self, root, level = 1):
          if root != None:
@@ -41,7 +36,7 @@ class AVLTree:
 # LR L L
 
 avlTree = AVLTree()
-avlTree.insert(12, avlTree.root)
-avlTree.insert(3, avlTree.root)
-avlTree.insert(9, avlTree.root)
+avlTree.insert(12)
+avlTree.insert(3)
+avlTree.insert(9)
 avlTree.in_order_level(avlTree.root, 1)
