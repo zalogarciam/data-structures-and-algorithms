@@ -62,8 +62,8 @@ class Tree():
 
     def pos_order(self, root):
         if root is not None:
-            self.pre_order(root.left)
-            self.pre_order(root.right)
+            self.pos_order(root.left)
+            self.pos_order(root.right)
             print(root.data)
 
     def height(self, root):
@@ -197,19 +197,30 @@ class Tree():
         
         return siblings or self.are_siblings(root.left,a , b) or self.are_siblings(root.right,a ,b)
 
-    def get_ancestors(self):
-        pass
+    def get_ancestors(self, root, target):
+        if root is None:
+            return False
+        if root.data == target:
+            return True
+        left = self.get_ancestors(root.left, target)
+        right = self.get_ancestors(root.right, target)
+        if left or right:
+            print(root.data)
+            return True
+        return False
+        
 
-# tree = Tree()
-# tree.insert(10)
-# tree.insert(5)
-# tree.insert(15)
-# tree.insert(6)
-# tree.insert(1)
-# tree.insert(8)
-# tree.insert(12)
-# tree.insert(18)
-# tree.insert(17)
+
+tree = Tree()
+tree.insert(10)
+tree.insert(5)
+tree.insert(15)
+tree.insert(6)
+tree.insert(1)
+tree.insert(8)
+tree.insert(12)
+tree.insert(18)
+tree.insert(17)
 
 # print(tree.find(6))
 # print(tree.find(7))
@@ -240,25 +251,31 @@ class Tree():
 
 # print(tree2.equals(tree.root, tree2.root))
 
-tree3 = Tree()
-tree3.insert(20)
-tree3.insert(10)
-tree3.insert(30)
-tree3.insert(6)
-tree3.insert(21)
-tree3.insert(4)
-tree3.insert(3)
-tree3.insert(8)
-tree3.in_order_level(tree3.root)
-print(tree3.height(tree3.root))
-print(tree3.size_(tree3.root))
+# tree3 = Tree()
+# tree3.insert(20)
+# tree3.insert(10)
+# tree3.insert(30)
+# tree3.insert(6)
+# tree3.insert(21)
+# tree3.insert(4)
+# tree3.insert(3)
+# tree3.insert(8)
+# tree3.in_order_level(tree3.root)
+# print(tree3.height(tree3.root))
+# print(tree3.size_(tree3.root))
 
-print('Leaves', tree3.count_leaves(tree3.root))
-print('Max: ', tree3.max_value(tree3.root))
-print('Contains: ', tree3.contains(tree3.root, 8))
-print('Contains: ', tree3.contains(tree3.root, 11))
-print('Siblings: ', tree3.are_siblings(tree3.root, 8, 4))
-print('Siblings: ', tree3.are_siblings(tree3.root, 6, 21))
+# print('Leaves', tree3.count_leaves(tree3.root))
+# print('Max: ', tree3.max_value(tree3.root))
+# print('Contains: ', tree3.contains(tree3.root, 8))
+# print('Contains: ', tree3.contains(tree3.root, 11))
+# print('Siblings: ', tree3.are_siblings(tree3.root, 8, 4))
+# print('Siblings: ', tree3.are_siblings(tree3.root, 6, 21))
+
+# tree.pre_order(tree.root)
+# tree.in_order(tree.root)
+# tree.in_order_level(tree.root, 1)
+# tree.pos_order(tree.root)
+tree.get_ancestors(tree.root, 8)
 
 # tree3.swap_root()
 # print(tree.validate_bst(tree3.root, -float('inf'), float('inf')))
