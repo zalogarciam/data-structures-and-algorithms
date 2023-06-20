@@ -273,7 +273,7 @@ tree.insert(17)
 
 # tree.pre_order(tree.root)
 # tree.in_order(tree.root)
-# tree.in_order_level(tree.root, 1)
+tree.in_order_level(tree.root, 1)
 # tree.pos_order(tree.root)
 tree.get_ancestors(tree.root, 8)
 
