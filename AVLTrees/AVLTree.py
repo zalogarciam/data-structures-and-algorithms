@@ -21,12 +21,29 @@ class AVLTree:
         else:
             root.right = self._insert(data, root.right)
 
-
-        root.height = max(self.height(root.left), self.height(root.right)) + 1
-        self.balance(root)
+        root.height = self.set_height(root)
       
-        return root
+        return self.balance(root)
     
+    def rotate_left(self, root):
+        new_root = root.right
+        root.right = new_root.left
+        new_root.left = root
+        self.set_height(root)
+        self.set_height(new_root)
+        return new_root
+
+    def rotate_right(self, root):
+        new_root= root.left
+        root.left = new_root.right
+        new_root.right = root
+        self.set_height(root)
+        self.set_height(new_root)
+        return new_root
+
+    def set_height(self, node):
+        node.height = max(self.height(node.left), self.height(node.right)) + 1
+
     def height(self, node):
         if node is None:
             return -1
@@ -45,13 +62,14 @@ class AVLTree:
         if self.left_heavy(root):
             # print("Left heavy: ", balance)
             if (self.balance_factor(root.left) < 0):
-                print('Left rotate: ' + str(root.left.data))
-            print("Right rotate: " + str(root.data))
+                root.left = self.rotate_left(root.left)
+            return self.rotate_right(root)
         elif self.right_heavy(root):
             # print("Right heavy: " , balance)
             if (self.balance_factor(root.right) > 0):
-                print('Right rotate: ' + str(root.right.data))
-            print("Left rotate: " + str(root.data))
+                 root.right = self.rotate_right(root.right)
+            return self.rotate_left(root)
+        return root
     
     def balance_factor(self, node):
         if node is None: return 0
