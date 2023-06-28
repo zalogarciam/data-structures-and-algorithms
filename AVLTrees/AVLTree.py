@@ -24,6 +24,7 @@ class AVLTree:
         root.height = self.set_height(root)
       
         return self.balance(root)
+        # return root
     
     def rotate_left(self, root):
         new_root = root.right
@@ -80,6 +81,23 @@ class AVLTree:
             self.in_order_level(root.left, level + 1)
             print(level * 4 * "-" + str(root.data) + " ("+str(root.height)+")" )
             self.in_order_level(root.right, level + 1)
+
+    def is_balanced(self, root):
+        if root is None: return True
+        height_diff = (self.height(root.left) - self.height(root.right))
+        if height_diff <= 1:
+            return True
+        return False
+    
+    def size(self, root):
+        if root is None: return 0
+        return 1 + self.size(root.left) + self.size(root.right)
+    
+    def is_perfect(self, root):
+        height = self.height(root)
+        size = self.size(root)
+        return pow(2, height + 1) - 1 == size
+    
 # 1 2 3 4 5
 # L L
 
@@ -92,6 +110,16 @@ class AVLTree:
 avlTree = AVLTree()
 avlTree.insert(10)
 avlTree.insert(30)
-avlTree.insert(20)
+avlTree.insert(31)
+avlTree.insert(32)
+avlTree.insert(33)
 
+avlTree.insert(20)
+avlTree.insert(9)
+avlTree.insert(8)
+# avlTree.insert(7)
+# avlTree.insert(6)
 avlTree.in_order_level(avlTree.root, 1)
+print(avlTree.is_balanced(avlTree.root))
+print(avlTree.size(avlTree.root))
+print(avlTree.is_perfect(avlTree.root))
