@@ -9,7 +9,8 @@ class Heap:
         self.size += 1
         count = self.size
         index_parent = int((self.size/ 2) - 1)
-        while (True):
+        # Bubble up
+        while True:
             parent = self.items[index_parent]
             if parent < value:
                 self.items[count - 1] = parent
@@ -19,10 +20,23 @@ class Heap:
             else:
                 break
         
-
     def remove(self):
-        pass
-
+        self.items[0] = self.items[-1]
+        del self.items[-1]
+        count = 0
+        child_index = (self.items.index(self.items[count]) * 2) + 1
+        # Bubble down
+        while True:
+            child = self.items[child_index]
+            current = self.items[count]
+            if current < child:
+                self.items[count] = child
+                self.items[child_index] = current
+                child_index = (child_index * 2) + 1
+                count = (count * 2) + 1
+            else:
+                break
+            
     def print_heap(self):
         height = math.ceil((math.log(self.size + 1,2)))
         spaces = height
@@ -44,4 +58,8 @@ heap.insert(12)
 heap.insert(9)
 heap.insert(4)
 heap.insert(1)
+heap.insert(24)
 heap.print_heap()
+heap.remove()
+heap.print_heap()
+
