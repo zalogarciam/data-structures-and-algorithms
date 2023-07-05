@@ -37,11 +37,13 @@ class Heap:
         self.items[second] = temp
 
     def remove_(self):
+        root = self.items[0]
         if self.size == 0: raise Exception("Empty heap")
         self.items[0] = self.items[-1]
         del self.items[-1]
         self.bubble_down()       
         self.size -= 1
+        return root
 
     def bubble_down(self):
         index = 0
@@ -51,10 +53,27 @@ class Heap:
             index = self.larger_child_index(index)
 
     def larger_child_index(self, index):
+        if not self.has_left_child(index):
+            return index
+        if not self.has_right_child(index):
+            return self.left_child_index(index)
         return self.left_child_index(index) if self.left_child(index) > self.right_child(index) else self.right_child_index(index) 
 
+    def has_left_child(self, index):
+        return self.left_child_index(index) <= self.size
+    
+    def has_right_child(self, index):
+        return self.right_child_index(index) <= self.size
+
     def is_valid_parent(self, index):
-        return self.items[index] >= self.left_child(index) and self.items[index] >= self.right_child(index)
+        if not self.has_left_child(index):
+            return True
+        
+        is_valid = self.items[index] >= self.left_child(index)
+
+        if not self.has_right_child(index):
+            is_valid = is_valid and self.items[index] >= self.right_child(index)
+        return is_valid
 
     def left_child(self, index):
         return self.items[self.left_child_index(index)]
