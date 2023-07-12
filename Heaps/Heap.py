@@ -94,6 +94,16 @@ class Heap:
             spaces = spaces - 1
         print(self.items)
 
+    def find_kth_largest_item(self, array, k):
+        if k == 0 or k > len(array):
+            raise Exception("Illegal exception")
+        heap = Heap()
+        for item in array:
+            heap.insert_(item)
+        for i in range(k - 1):
+            heap.remove_()
+        return heap.items[0]
+
 heap = Heap()
 heap.insert_(15)
 heap.insert_(10)
@@ -104,16 +114,20 @@ heap.insert_(9)
 heap.insert_(4)
 heap.insert_(1)
 heap.insert_(24)
+
+array = [15, 10 , 3, 8 ,12, 9 ,4 , 1 ,24]
+print(heap.find_kth_largest_item(array, 1))
+print(heap.find_kth_largest_item(array, 9))
+
 # heap.print_heap()
-heap.print_heap()
-heap.remove_()
-# heap.heap_sort()
-heap.print_heap()
-heap.remove_()
-heap.print_heap()
-heap.remove_()
-heap.print_heap()
-# TODO Check when removing ... its not looking good after the second remove
+# heap.print_heap()
+# heap.remove_()
+# # heap.heap_sort()
+# heap.print_heap()
+# heap.remove_()
+# heap.print_heap()
+# heap.remove_()
+# heap.print_heap()
 
 
 
