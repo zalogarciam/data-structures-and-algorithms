@@ -1,6 +1,9 @@
 class MinHeap:
-    def heapify(self, numbers):
-        keys = [key for key in numbers]
+    def __init__(self, items) -> None:
+        self.items = items
+
+    def heapify(self):
+        keys = [key for key in self.items]
         last_parent_index =(len(keys) // 2) - 1
         for i in range(last_parent_index, -1, -1):
             self.heapify_(keys, i)
@@ -28,25 +31,32 @@ class MinHeap:
         array[first] = array[second]
         array[second] = temp
 
-# max_heap = MinHeap()
-# list = {5:"A", 3:"B", 8:"C", 4:"D", 1:"E", 2:"F"}
-# print(max_heap.heapify(list))
+    def is_empty(self):
+        return len(self.items) == 0
+
+list = {5:"A", 3:"B", 8:"C", 4:"D", 1:"E", 2:"F"}
+max_heap = MinHeap(list)
+print(max_heap.heapify())
+print(max_heap.is_empty())
 
 class PriorityQueue:
-    def __init__(self) -> None:
-        pass
+    def __init__(self, dict) -> None:
+        self.min_heap = MinHeap(dict)
+        self.items = []
 
     def add(self, value, priority):
         pass
 
-    def remove():
+    def remove(self):
         pass
 
-    def is_empty():
-        pass
+    def is_empty(self):
+        return len(self.items) == 0
 
 dict = {5:"A", 3:"B", 8:"C", 4:"D", 1:"E", 2:"F"}
-queue = PriorityQueue()
+queue = PriorityQueue(dict)
 
 for key in list:
     queue.add(dict[key], key)
+
+print(queue.is_empty())
