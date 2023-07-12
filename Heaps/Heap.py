@@ -4,19 +4,6 @@ class Heap:
         self.items = []
         self.size = 0
 
-    # def insert(self, value):
-    #     self.items.append(value)        
-    #     self.size += 1
-    #     count = self.size
-    #     index_parent = int((self.size/ 2) - 1)
-    #     # Bubble up
-    #     while self.items[index_parent] < value:
-    #         parent = self.items[index_parent]
-    #         self.items[count - 1] = parent
-    #         self.items[index_parent] = value
-    #         index_parent = int(((index_parent + 1)/ 2) - 1)
-    #         count = int(count / 2)
-
     def insert_(self, value):
         self.items.append(value)
         self.size += 1
@@ -29,7 +16,7 @@ class Heap:
             index = self.parent(index)
     
     def parent(self, index):
-        return math.ceil((index - 1)/2)
+        return (index - 1)//2
 
     def swap(self, first, second):
         temp = self.items[first]
@@ -41,8 +28,8 @@ class Heap:
         if self.size == 0: raise Exception("Empty heap")
         self.items[0] = self.items[-1]
         del self.items[-1]
-        self.bubble_down()       
         self.size -= 1
+        self.bubble_down()       
         return root
 
     def bubble_down(self):
@@ -50,7 +37,7 @@ class Heap:
         while index <= self.size and not self.is_valid_parent(index):
             larger_child_index = self.larger_child_index(index)
             self.swap(index, larger_child_index)
-            index = self.larger_child_index(index)
+            index = larger_child_index
 
     def larger_child_index(self, index):
         if not self.has_left_child(index):
@@ -59,16 +46,16 @@ class Heap:
             return self.left_child_index(index)
         left  = self.left_child(index)
         right = self.right_child(index)
-        if left > right:
+        if left >= right:
              return self.left_child_index(index)
         else:
              return self.right_child_index(index)
 
     def has_left_child(self, index):
-        return self.left_child_index(index) <= self.size
+        return self.left_child_index(index) < self.size
     
     def has_right_child(self, index):
-        return self.right_child_index(index) <= self.size
+        return self.right_child_index(index) < self.size
 
     def is_valid_parent(self, index):
         if not self.has_left_child(index):
@@ -91,21 +78,6 @@ class Heap:
     
     def right_child_index(self, index):
         return index * 2 +  2
-
-    # def remove(self):
-    #     self.items[0] = self.items[-1]
-    #     del self.items[-1]
-    #     self.size -= 1
-    #     count = 0
-    #     child_index = (self.items.index(self.items[count]) * 2) + 1
-    #     # Bubble down
-    #     while self.items[count] < self.items[child_index]:
-    #         child = self.items[child_index]
-    #         current = self.items[count]
-    #         self.items[count] = child
-    #         self.items[child_index] = current
-    #         child_index = (child_index * 2) + 1
-    #         count = (count * 2) + 1
         
     def is_empty(self):
         return self.size == 0
@@ -116,17 +88,11 @@ class Heap:
         for i in range(0, height):
             start = int(math.pow(2, i) - 1)
             end = int(math.pow(2, i + 1) - 2)
-            for index, node in enumerate(self.items[start:end + 1]):
+            for node in self.items[start:end + 1]:
                 print(spaces * "   " + str(node), end="")
             print()
             spaces = spaces - 1
         print(self.items)
-
-    def heap_sort(self):
-        while not self.is_empty():
-            print(self.remove_())
-            print(str(self.size))
-
 
 heap = Heap()
 heap.insert_(15)
@@ -139,9 +105,17 @@ heap.insert_(4)
 heap.insert_(1)
 heap.insert_(24)
 # heap.print_heap()
-# heap.remove_()
 heap.print_heap()
-heap.heap_sort()
+heap.remove_()
+# heap.heap_sort()
+heap.print_heap()
+heap.remove_()
+heap.print_heap()
+heap.remove_()
+heap.print_heap()
+# TODO Check when removing ... its not looking good after the second remove
+
+
 
 
 
