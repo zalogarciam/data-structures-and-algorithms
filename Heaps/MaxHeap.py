@@ -21,16 +21,27 @@ class MaxHeap:
             return
         self.swap(array, index, larger_index)
         self.heapify_(array, larger_index)
-
+        return array
     
     def swap(self, array, first, second):
         temp = array[first]
         array[first] = array[second]
         array[second] = temp
 
+    
+    def is_max_heap(self, list):
+        temp = list.copy()
+        array = self.heapify(list)
+        for i in range(len(list)):
+            if array[i] != temp[i]:
+                return False
+        return True
+
+
 max_heap = MaxHeap()
 list = [5, 3, 8, 4, 1, 2]
-print(list)
-print(max_heap.heapify(list))
+# print(list)
+# print(max_heap.heapify(list))
+print(max_heap.is_max_heap(list))
 
 
