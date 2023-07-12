@@ -28,6 +28,25 @@ class MinHeap:
         array[first] = array[second]
         array[second] = temp
 
-max_heap = MinHeap()
-list = {5:"A", 3:"B", 8:"C", 4:"D", 1:"E", 2:"F"}
-print(max_heap.heapify(list))
+# max_heap = MinHeap()
+# list = {5:"A", 3:"B", 8:"C", 4:"D", 1:"E", 2:"F"}
+# print(max_heap.heapify(list))
+
+class PriorityQueue:
+    def __init__(self) -> None:
+        pass
+
+    def add(self, value, priority):
+        pass
+
+    def remove():
+        pass
+
+    def is_empty():
+        pass
+
+dict = {5:"A", 3:"B", 8:"C", 4:"D", 1:"E", 2:"F"}
+queue = PriorityQueue()
+
+for key in list:
+    queue.add(dict[key], key)
