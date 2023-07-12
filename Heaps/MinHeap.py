@@ -1,9 +1,10 @@
 class MinHeap:
     def heapify(self, numbers):
-        last_parent_index =(len(numbers) // 2) - 1
+        keys = [key for key in numbers]
+        last_parent_index =(len(keys) // 2) - 1
         for i in range(last_parent_index, -1, -1):
-            self.heapify_(numbers, i)
-        return numbers
+            self.heapify_(keys, i)
+        return keys
 
     def heapify_(self, array, index):
         min_index = index
@@ -28,6 +29,5 @@ class MinHeap:
         array[second] = temp
 
 max_heap = MinHeap()
-list = [5, 3, 8, 4, 1, 2]
-print(list)
+list = {5:"A", 3:"B", 8:"C", 4:"D", 1:"E", 2:"F"}
 print(max_heap.heapify(list))
