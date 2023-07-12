@@ -115,9 +115,9 @@ heap.insert_(4)
 heap.insert_(1)
 heap.insert_(24)
 
-array = [15, 10 , 3, 8 ,12, 9 ,4 , 1 ,24]
-print(heap.find_kth_largest_item(array, 1))
-print(heap.find_kth_largest_item(array, 9))
+# array = [15, 10 , 3, 8 ,12, 9 ,4 , 1 ,24]
+# print(heap.find_kth_largest_item(array, 1))
+# print(heap.find_kth_largest_item(array, 9))
 
 # heap.print_heap()
 # heap.print_heap()
