@@ -1,27 +1,19 @@
 class Node:
     def __init__(self, value):
         self.value = value
-        self.children = [None] * 26
+        self.children = {}
         self.eow = False
-
-    def get_children(self):
-        children = []
-        for child in self.children:
-            if child is not None:
-                children.append(child.value)
-        return children
 
 class Trie:
     def __init__(self) -> None:
-        self.root = Node(None)
+        self.root = Node('NULL')
 
     def insert(self, value):
         current = self.root
         for char in value:
-            index = ord(char) - ord('a')
-            if (current.children[index] == None):
-                current.children[index] = Node(char)
-            current = current.children[index]
+            if (char not in current.children):
+                current.children[char] = Node(char)
+            current = current.children[char]
         current.eow = True
 
     def pprint(self):
@@ -35,7 +27,7 @@ class Trie:
         prefix = prefix + "|   "
 
         for child in node.children:
-            self._pprint_helper(child, prefix)
+            self._pprint_helper(node.children[child], prefix)
 
 trie = Trie()
 trie.insert('cat')
