@@ -122,7 +122,8 @@ class PriorityQueue:
     
     def print_priority(self):
         self.min_heap.print_heap()
-        print(self.min_heap.items)
+        for item in self.items:
+            print('Key: ', item, 'Value: ', self.items[item])
 
 queue = PriorityQueue()
 queue.add("A", 5)
