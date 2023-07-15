@@ -19,15 +19,10 @@ class Trie:
         current = self.root
         for char in value:
             index = ord(char) - ord('a')
-            if char in current.get_children():
-                current = current.children[index]
-                continue
-            current.children[index] = Node(char)
-            if value[len(value) - 1] == char:
-                current.children[index].eow = True
-                break
-
+            if (current.children[index] == None):
+                current.children[index] = Node(char)
             current = current.children[index]
+        current.eow = True
 
     def pprint(self):
         self._pprint_helper(self.root, "")
