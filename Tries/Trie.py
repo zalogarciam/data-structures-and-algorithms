@@ -28,11 +28,21 @@ class Trie:
                 break
 
             current = current.children[index]
-            
-    def print_trie(self):
-        print(self.root.children)
+
+    def pprint(self):
+        self._pprint_helper(self.root, "")
+
+    def _pprint_helper(self, node, prefix):
+        if node is None:
+            return
+
+        print(prefix + "|--", node.value)
+        prefix = prefix + "|   "
+
+        for child in node.children:
+            self._pprint_helper(child, prefix)
 
 trie = Trie()
 trie.insert('cat')
 trie.insert('can')
-trie.print_trie()
+trie.pprint()
