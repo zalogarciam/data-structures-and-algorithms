@@ -16,6 +16,15 @@ class Trie:
             current = current.children[char]
         current.eow = True
 
+    def contains(self, word):
+        current = self.root
+        for char in word:
+            if (char not in current.children):
+                return False
+            else:
+               current = current.children[char]
+        return current.eow
+
     def pprint(self):
         self._pprint_helper(self.root, "")
 
@@ -31,5 +40,10 @@ class Trie:
 
 trie = Trie()
 trie.insert('cat')
-trie.insert('can')
+trie.insert('canada')
+print(trie.contains('cat'))
+print(trie.contains('can'))
+print(trie.contains('cam'))
+print(trie.contains('canada'))
+
 trie.pprint()
