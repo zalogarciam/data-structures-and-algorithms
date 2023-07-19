@@ -18,6 +18,7 @@ class Trie:
 
     def contains(self, word):
         current = self.root
+        if word is None: return False
         for char in word:
             if (char not in current.children):
                 return False
