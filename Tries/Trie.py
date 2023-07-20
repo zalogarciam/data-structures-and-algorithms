@@ -71,16 +71,46 @@ class Trie:
         for item in list(node.children.values()):
             self.traverse_(item)
 
+    def find_words(self, prefix):
+        last_node = self.find_last_node_of(prefix)
+        list = []
+        self.find_words_(last_node, prefix, list)
+        return list
+
+    def find_words_(self, node, prefix, list):
+        if node is None:
+            return
+        if node.eow:
+            list.append(prefix)
+        for child in node.children:
+            self.find_words_(node.children[child], prefix + node.children[child].value, list)
+
+    def find_last_node_of(self, prefix):
+        if prefix is None: return None
+        current = self.root
+        for char in prefix:
+            child = current.children.get(char, None)
+            if child is None:
+                return None
+            current = child
+        return current
+
 trie = Trie()
 # trie.insert('cat')
 trie.insert('car')
 trie.insert('care')
+trie.insert('card')
+trie.insert('careful')
+trie.insert('egg')
+print(trie.find_words('car'))
+
+
 # trie.insert('canada')
 # print(trie.contains('cat'))
 # print(trie.contains('can'))
 # print(trie.contains('cam'))
 # print(trie.contains('canada'))
 # trie.traverse()
-trie.pprint()
-trie.remove('care')
+# trie.pprint()
+# trie.remove('care')
 trie.pprint()
