@@ -39,6 +39,14 @@ class Trie:
         for child in node.children:
             self._pprint_helper(node.children[child], prefix)
 
+    def traverse(self):
+        self.traverse_(self.root)
+
+    def traverse_(self, node):
+        print(node.value)
+        for item in list(node.children.values()):
+            self.traverse_(item)
+
 trie = Trie()
 trie.insert('cat')
 trie.insert('canada')
@@ -46,5 +54,5 @@ print(trie.contains('cat'))
 print(trie.contains('can'))
 print(trie.contains('cam'))
 print(trie.contains('canada'))
-
+trie.traverse()
 trie.pprint()
