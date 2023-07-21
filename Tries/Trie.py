@@ -29,6 +29,17 @@ class Trie:
                current = current.children[char]
         return current.eow
     
+    def contains_recursive_(self, current, word, index):
+        if index >= len(word): return current.eow
+        char = word[index]
+        if (char not in current.children):
+            return False
+        return self.contains_recursive_(current.children[char], word, index + 1)
+
+    def contains_recursive(self, word):
+        if word is None: return False
+        return self.contains_recursive_(self.root, word, 0)
+
     def remove(self, word):
         if word is None: return
         self.remove_(self.root, word, 0)
@@ -95,6 +106,17 @@ class Trie:
             current = child
         return current
 
+    def count_words(self):
+        return self.count_words_(self.root)
+    
+    def count_words_(self, node):
+        count = 0
+        if node.eow:
+            count += 1
+        for item in list(node.children.values()):
+            count += self.count_words_(item)
+        return count
+
 trie = Trie()
 # trie.insert('cat')
 trie.insert('car')
@@ -102,8 +124,10 @@ trie.insert('care')
 trie.insert('card')
 trie.insert('careful')
 trie.insert('egg')
-print(trie.find_words('car'))
-
+# print(trie.find_words('car'))
+# print(trie.contains_recursive('car'))
+# print(trie.contains_recursive('cares'))
+print(trie.count_words())
 
 # trie.insert('canada')
 # print(trie.contains('cat'))
