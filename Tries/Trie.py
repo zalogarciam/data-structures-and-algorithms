@@ -116,18 +116,31 @@ class Trie:
         for item in list(node.children.values()):
             count += self.count_words_(item)
         return count
+    
+    def longest_common_prefix(self):
+        return self.find_longest_common_prefix(self.root)
+
+    def find_longest_common_prefix(self, node):
+        if not node:
+            return ""
+
+        if len(node.children) != 1 or node.eow:
+            return ""
+
+        char, child = next(iter(node.children.items()))
+        return char + self.find_longest_common_prefix(child)
 
 trie = Trie()
 # trie.insert('cat')
 trie.insert('car')
 trie.insert('care')
-trie.insert('card')
-trie.insert('careful')
-trie.insert('egg')
+# trie.insert('careful')
+# trie.insert('egg')
 # print(trie.find_words('car'))
 # print(trie.contains_recursive('car'))
 # print(trie.contains_recursive('cares'))
-print(trie.count_words())
+# print(trie.count_words())
+print(trie.longest_common_prefix())
 
 # trie.insert('canada')
 # print(trie.contains('cat'))
