@@ -20,7 +20,7 @@ class Graph:
 
     def remove_node(self, label):
         if label not in self.nodes:
-            raise Exception('Node does not exist')
+            return
         for node in self.nodes:
             current = self.nodes[node]
             if current.has_neighbors() and current.neighbor_exists(self.nodes[label]):
@@ -28,12 +28,14 @@ class Graph:
         del self.nodes[label]
 
     def add_edge(self, source, destination):
+        if source not in self.nodes or destination not in self.nodes:
+            raise Exception('Node does not exist')
         if destination not in self.nodes[source].neighbors:
             self.nodes[source].neighbors.append(self.nodes[destination])
 
     def remove_edge(self, source, destination):
         if source not in self.nodes or destination not in self.nodes:
-            raise Exception('One of the nodes does not exist')
+            return
         if self.nodes[destination] in self.nodes[source].neighbors:
             self.nodes[source].neighbors.remove(self.nodes[destination])
 
@@ -43,7 +45,7 @@ class Graph:
             for neighbor in current.neighbors:
                 print(self.nodes[node].label, "-->", neighbor.label)
         print()
-
+# Improvement - change neighbors list to dict
 graph = Graph()
 graph.add_node('A')
 graph.add_node('B')
