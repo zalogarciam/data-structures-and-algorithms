@@ -54,7 +54,25 @@ class Graph:
         visited = set()
         self.dfs_(self.nodes[label], visited)
 
+    from collections import deque
+    
     def dfs_iterative(self, label):
+        if label not in self.nodes:
+            return
+        stack = [label]
+        visited = set()
+        while len(stack) > 0:
+            current = stack.pop()
+            if current in visited:
+                continue
+            print(current)
+            visited.add(current)
+            neighbors = reversed(self.adjacency_list[current])
+            for neighbor in neighbors:
+                if neighbor.label not in visited:
+                    stack.append(neighbor.label)
+        
+    def bfs(self, label):
         if label not in self.nodes:
             return
         stack = [label]
@@ -68,7 +86,6 @@ class Graph:
             for neighbor in self.adjacency_list[current]:
                 if neighbor.label not in visited:
                     stack.append(neighbor.label)
-
 
 # Improvement - change neighbors list to dict
 graph = Graph()
@@ -87,6 +104,7 @@ graph.add_edge('D', 'E')
 # graph.print_graph()
 # graph.dfs('C')
 graph.dfs_iterative('C')
+graph.bfs('C')
 
 # graph.remove_node('A')
 # graph.remove_edge('A', 'C')
