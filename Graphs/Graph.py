@@ -42,18 +42,17 @@ class Graph:
         print()
 
     def dfs_(self, node, visited):
-        neighbors = self.adjacency_list[node.label]
-        for neighbor in neighbors:
-            if neighbor not in visited:
-                print(neighbor.label)
-                visited.add(neighbor)
+        print(node.label)
+        visited.add(node.label)
+        for neighbor in self.adjacency_list[node.label]:
+            if neighbor.label not in visited:
                 self.dfs_(neighbor, visited)
 
     def dfs(self, label):
         if label not in self.nodes:
-            raise Exception("Starting node not found")
-        print(label)
-        self.dfs_(self.nodes[label], set())
+            return
+        visited = set()
+        self.dfs_(self.nodes[label], visited)
 
 
 
