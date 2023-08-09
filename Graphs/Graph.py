@@ -87,6 +87,12 @@ class Graph:
                 if neighbor.label not in visited:
                     stack.append(neighbor.label)
 
+    def topological_sort(self):
+        pass
+
+    def topological_sort_(self):
+        pass
+
 # Improvement - change neighbors list to dict
 graph = Graph()
 graph.add_node('A')
