@@ -54,6 +54,18 @@ class Graph:
         visited = set()
         self.dfs_(self.nodes[label], visited)
 
+    def dfs_iterative(self, label):
+        if label not in self.nodes:
+            return
+        stack = [label]
+        visited = set()
+        while len(stack) > 0:
+            current = stack.pop(0)
+            print(current)
+            visited.add(current)
+            for neighbor in self.adjacency_list[current]:
+                if neighbor.label not in visited and neighbor.label not in stack:
+                    stack.append(neighbor.label)
 
 
 # Improvement - change neighbors list to dict
@@ -70,8 +82,9 @@ graph.add_edge('C', 'A')
 graph.add_edge('C', 'B')
 graph.add_edge('C', 'D')
 graph.add_edge('D', 'E')
-graph.print_graph()
-graph.dfs('C')
+# graph.print_graph()
+# graph.dfs('C')
+graph.dfs_iterative('C')
 
 # graph.remove_node('A')
 # graph.remove_edge('A', 'C')
