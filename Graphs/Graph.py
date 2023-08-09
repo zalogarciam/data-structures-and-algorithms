@@ -61,10 +61,12 @@ class Graph:
         visited = set()
         while len(stack) > 0:
             current = stack.pop(0)
+            if current in visited:
+                continue
             print(current)
             visited.add(current)
             for neighbor in self.adjacency_list[current]:
-                if neighbor.label not in visited and neighbor.label not in stack:
+                if neighbor.label not in visited:
                     stack.append(neighbor.label)
 
 
