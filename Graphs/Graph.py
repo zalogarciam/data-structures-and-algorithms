@@ -87,12 +87,22 @@ class Graph:
                 if neighbor.label not in visited:
                     stack.append(neighbor.label)
 
-    def topological_sort(self):
-        pass
+    def topological_sort(self, label):
+        if label not in self.nodes:
+            return
+        visited = set()
+        stack = []
+        self.topological_sort_(self.nodes[label], visited, stack)
+        print(stack)
 
-    def topological_sort_(self):
-        pass
-
+    def topological_sort_(self, node, visited, stack):
+        visited.add(node.label)
+        for neighbor in self.adjacency_list[node.label]:
+            if neighbor.label not in visited:
+                self.topological_sort_(neighbor, visited, stack)
+            if neighbor.label not in stack:
+                stack.append(neighbor.label)
+        stack.append(node.label)
 # Improvement - change neighbors list to dict
 graph = Graph()
 # graph.add_node('A')
@@ -125,4 +135,5 @@ graph.add_edge('X', 'A')
 graph.add_edge('A', 'B')
 graph.add_edge('A', 'P')
 graph.add_edge('B', 'P')
-graph.print_graph()
+# graph.print_graph()
+graph.topological_sort('X')
