@@ -40,16 +40,41 @@ class Graph:
             for neighbor in self.adjacency_list[current.label]:
                 print(self.nodes[node].label, "-->", neighbor.label)
         print()
+
+    def dfs_(self, node, visited):
+        neighbors = self.adjacency_list[node.label]
+        for neighbor in neighbors:
+            if neighbor not in visited:
+                print(neighbor.label)
+                visited.add(neighbor)
+                self.dfs_(neighbor, visited)
+
+    def dfs(self, label):
+        if label not in self.nodes:
+            raise Exception("Starting node not found")
+        print(label)
+        self.dfs_(self.nodes[label], set())
+
+
+
 # Improvement - change neighbors list to dict
 graph = Graph()
 graph.add_node('A')
 graph.add_node('B')
 graph.add_node('C')
+graph.add_node('D')
+graph.add_node('E')
 graph.add_edge('A', 'B')
-graph.add_edge('A', 'C')
-graph.add_edge('B', 'A')
+graph.add_edge('A', 'E')
+graph.add_edge('B', 'E')
+graph.add_edge('C', 'A')
+graph.add_edge('C', 'B')
+graph.add_edge('C', 'D')
+graph.add_edge('D', 'E')
 graph.print_graph()
-graph.remove_node('A')
+graph.dfs('C')
+
+# graph.remove_node('A')
 # graph.remove_edge('A', 'C')
 
-graph.print_graph()
+# graph.print_graph()
