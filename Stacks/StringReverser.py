@@ -10,5 +10,5 @@ def reverse_string(string):
     print(result)
 
 reverse_string("abcd")
-reverse_string(None)
+# reverse_string(None)
 reverse_string("")

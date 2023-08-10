@@ -87,22 +87,49 @@ class Graph:
                 if neighbor.label not in visited:
                     stack.append(neighbor.label)
 
+    # not ok...
     def topological_sort(self, label):
         if label not in self.nodes:
             return
         visited = set()
         stack = []
+        sorted = []
         self.topological_sort_(self.nodes[label], visited, stack)
         print(stack)
+        while len(stack) > 0:
+            sorted.append(stack.pop())
+        print(sorted)
 
     def topological_sort_(self, node, visited, stack):
         visited.add(node.label)
         for neighbor in self.adjacency_list[node.label]:
             if neighbor.label not in visited:
                 self.topological_sort_(neighbor, visited, stack)
-            if neighbor.label not in stack:
-                stack.append(neighbor.label)
+            # if neighbor.label not in stack:
+            #     stack.append(neighbor.label)
         stack.append(node.label)
+
+    def top_sort(self):
+        visited = set()
+        stack = []
+        for label in self.nodes:
+            self.top_sort_(label, visited, stack)
+            print(visited,stack)
+        sorted = []
+        while len(stack) > 0:
+            sorted.append(stack.pop())
+        return sorted
+
+    def top_sort_(self, node, visited, stack):
+
+        if node in visited: return
+        visited.add(node)
+        for neighbour in self.adjacency_list[node]:
+            self.top_sort_(neighbour.label, visited, stack)
+        
+        stack.append(node)
+        
+        
 # Improvement - change neighbors list to dict
 graph = Graph()
 # graph.add_node('A')
@@ -131,9 +158,18 @@ graph.add_node('X')
 graph.add_node('A')
 graph.add_node('B')
 graph.add_node('P')
+graph.add_node('G')
+graph.add_node('H')
+graph.add_node('I')
 graph.add_edge('X', 'A')
-graph.add_edge('A', 'B')
+graph.add_edge('X', 'B')
 graph.add_edge('A', 'P')
 graph.add_edge('B', 'P')
+graph.add_edge('P', 'G')
+graph.add_edge('P', 'H')
+graph.add_edge('H', 'I')
+graph.add_edge('I', 'G')
 # graph.print_graph()
-graph.topological_sort('X')
+print(graph.topological_sort('X'))
+
+# print(graph.top_sort())
