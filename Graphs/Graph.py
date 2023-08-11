@@ -128,7 +128,24 @@ class Graph:
             self.top_sort_(neighbour.label, visited, stack)
         
         stack.append(node)
+
+    def has_cycle(self, label):
+        if label not in self.nodes:
+            return
+        all = set()
+        visiting = set()
+        visited = set()
+     
+        return self.has_cycle_(label, visiting, visited)
         
+    def has_cycle_(self, label, visiting, visited):
+        visited.add(label)
+        if label in visiting: return True
+        visiting.add(label)
+        for neighbour in self.adjacency_list[label]:
+            if label not in visited:
+                return self.has_cycle_(neighbour.label, visiting, visited)
+        return False
         
 # Improvement - change neighbors list to dict
 graph = Graph()
@@ -154,22 +171,35 @@ graph = Graph()
 
 # graph.print_graph()
 
-graph.add_node('X')
-graph.add_node('A')
-graph.add_node('B')
-graph.add_node('P')
-graph.add_node('G')
-graph.add_node('H')
-graph.add_node('I')
-graph.add_edge('X', 'A')
-graph.add_edge('X', 'B')
-graph.add_edge('A', 'P')
-graph.add_edge('B', 'P')
-graph.add_edge('P', 'G')
-graph.add_edge('P', 'H')
-graph.add_edge('H', 'I')
-graph.add_edge('I', 'G')
+# graph.add_node('X')
+# graph.add_node('A')
+# graph.add_node('B')
+# graph.add_node('P')
+# graph.add_node('G')
+# graph.add_node('H')
+# graph.add_node('I')
+# graph.add_edge('X', 'A')
+# graph.add_edge('X', 'B')
+# graph.add_edge('A', 'P')
+# graph.add_edge('B', 'P')
+# graph.add_edge('P', 'G')
+# graph.add_edge('P', 'H')
+# graph.add_edge('H', 'I')
+# graph.add_edge('I', 'G')
 # graph.print_graph()
-print(graph.topological_sort('X'))
+# print(graph.topological_sort('X'))
 
 # print(graph.top_sort())
+
+graph.add_node('A')
+graph.add_node('B')
+graph.add_node('C')
+graph.add_node('D')
+graph.add_edge('A', 'B')
+graph.add_edge('A', 'C')
+graph.add_edge('B', 'C')
+graph.add_edge('D', 'A')
+graph.print_graph()
+
+print(graph.has_cycle('A'))
+
