@@ -143,10 +143,36 @@ class Graph:
         if label in visiting: return True
         visiting.add(label)
         for neighbour in self.adjacency_list[label]:
-            if label not in visited:
+            if neighbour not in visited:
                 return self.has_cycle_(neighbour.label, visiting, visited)
         return False
         
+    def cycle_exist(self):
+        all = []
+        visiting = []
+        visited = []
+        all = list(self.nodes.keys())
+        while(len(all) > 0):
+            current = all[0]
+            if (self.cycle_exists_(current, all, visiting, visited)):
+                return True
+        return False
+
+
+    def cycle_exists_(self, node, all , visiting, visited):
+        all.remove(node)
+        visiting.append(node)
+        for neighbour in self.adjacency_list[node]:
+            if neighbour.label in visited:
+                continue
+            if neighbour.label in visiting:
+                return True
+            if (self.cycle_exists_(neighbour.label, all, visiting, visited)):
+                return True
+        visiting.remove(node)
+        visited.append(node)
+        
+        return False
 # Improvement - change neighbors list to dict
 graph = Graph()
 # graph.add_node('A')
@@ -195,11 +221,17 @@ graph.add_node('A')
 graph.add_node('B')
 graph.add_node('C')
 graph.add_node('D')
+# graph.add_node('E')
+# graph.add_node('F')
 graph.add_edge('A', 'B')
-graph.add_edge('A', 'C')
 graph.add_edge('B', 'C')
+graph.add_edge('C', 'A')
 graph.add_edge('D', 'A')
+
+# graph.add_edge('E', 'F')
+# graph.add_edge('F', 'E')
+
 graph.print_graph()
 
-print(graph.has_cycle('A'))
+print(graph.cycle_exist())
 
