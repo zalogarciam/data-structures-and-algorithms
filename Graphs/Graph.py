@@ -148,26 +148,22 @@ class Graph:
         return False
         
     def cycle_exist(self):
-        all = []
         visiting = []
         visited = []
-        all = list(self.nodes.keys())
-        while(len(all) > 0):
-            current = all[0]
-            if (self.cycle_exists_(current, all, visiting, visited)):
+        for current in self.nodes:
+            if (self.cycle_exists_(current, visiting, visited)):
                 return True
         return False
 
 
-    def cycle_exists_(self, node, all , visiting, visited):
-        all.remove(node)
+    def cycle_exists_(self, node, visiting, visited):
         visiting.append(node)
         for neighbour in self.adjacency_list[node]:
             if neighbour.label in visited:
                 continue
             if neighbour.label in visiting:
                 return True
-            if (self.cycle_exists_(neighbour.label, all, visiting, visited)):
+            if (self.cycle_exists_(neighbour.label, visiting, visited)):
                 return True
         visiting.remove(node)
         visited.append(node)
