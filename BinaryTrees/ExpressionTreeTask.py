@@ -51,12 +51,6 @@ class ExpressionTree:
         
         return output
 
-    def display_expression_tree(self, root, level=0):
-        if root != None:
-            self.display_expression_tree(root.left, level + 1)
-            print(level * 4 * "_" + str(root.value))
-            self.display_expression_tree(root.right, level + 1)
-
     def build_expression_tree(self, postfix):
         stack = []  # Pila para almacenar nodos temporales
         
@@ -88,10 +82,9 @@ class ExpressionTree:
             return left_value / right_value   # Realizar división
 
 tree = ExpressionTree()  
-expression = "8 - 2 * 3 + 6 / 2"
+expression = "3 +    ( 4  * 5 )"
 tokens = tree.tokenize_expression(expression) 
 postfix = tree.infix_to_postfix(tokens)
 root = tree.build_expression_tree(postfix)
-tree.display_expression_tree(root)
 result = tree.evaluate_expression_tree(root)
 print(f"Expression Tree Evaluation: {expression.replace(' ', '')}={result}")
