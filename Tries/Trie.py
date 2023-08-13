@@ -78,9 +78,9 @@ class Trie:
         self.traverse_(self.root)
 
     def traverse_(self, node):
-        print(node.value)
         for item in list(node.children.values()):
             self.traverse_(item)
+        print(node.value)
 
     def find_words(self, prefix):
         last_node = self.find_last_node_of(prefix)
@@ -134,21 +134,21 @@ trie = Trie()
 # trie.insert('cat')
 trie.insert('car')
 trie.insert('care')
-trie.insert('card')
+# trie.insert('card')
 # trie.insert('careful')
 # trie.insert('egg')
 # print(trie.find_words('car'))
 # print(trie.contains_recursive('car'))
 # print(trie.contains_recursive('cares'))
 # print(trie.count_words())
-print(trie.longest_common_prefix())
+# print(trie.longest_common_prefix())
 
 # trie.insert('canada')
 # print(trie.contains('cat'))
 # print(trie.contains('can'))
 # print(trie.contains('cam'))
 # print(trie.contains('canada'))
-# trie.traverse()
+trie.traverse()
 # trie.pprint()
 # trie.remove('care')
-trie.pprint()
+# trie.pprint()
