@@ -6,13 +6,18 @@ class WeightedGraph:
     class Node:
         def __init__(self, label) -> None:
             self.label = label
-
+    
+        def __str__(self):
+            return f"{self.label}"
     class Edge:
         def __init__(self, source, destination, weight) -> None:
             self.source = WeightedGraph.Node(source)
             self.destination = WeightedGraph.Node(destination)
             self.weight = weight
     
+        def __str__(self):
+            return f"{self.source} --> {self.destination} ({self.weight})"
+        
     def add_node(self, label):
         if label not in self.nodes:
             self.nodes[label] = self.Node(label)
@@ -25,24 +30,21 @@ class WeightedGraph:
         current_source.append(self.Edge(source, destination, weight))
         current_source.append(self.Edge(destination, source, weight))
 
-        current_destination = self.adjacency_list[destination]
-        current_destination.append(self.Edge(source, destination, weight))
-        current_destination.append(self.Edge(destination, source, weight))
+        # current_destination = self.adjacency_list[destination]
+        # current_destination.append(self.Edge(source, destination, weight))
+        # current_destination.append(self.Edge(destination, source, weight))
 
     def print_graph(self):
         for item in self.adjacency_list:
             neighbours = self.adjacency_list[item]
             for neighbour in neighbours:
-                print(neighbour.source.label, "-->", neighbour.destination.label, '(', neighbour.weight, ')')
+                print(neighbour)
         print()
 
 graph = WeightedGraph()
 graph.add_node('A')
 graph.add_node('B')
 graph.add_node('C')
-graph.add_node('D')
 graph.add_edge('A', 'B', 3)
-graph.add_edge('A', 'C', 7)
-graph.add_edge('A', 'D', 5)
-graph.add_edge('B', 'D', 1)
+graph.add_edge('A', 'C', 2)
 graph.print_graph()
