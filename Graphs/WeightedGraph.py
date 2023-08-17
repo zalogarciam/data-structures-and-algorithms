@@ -9,8 +9,8 @@ class WeightedGraph:
 
     class Edge:
         def __init__(self, source, destination, weight) -> None:
-            self.source = source
-            self.destination = destination
+            self.source = WeightedGraph.Node(source)
+            self.destination = WeightedGraph.Node(destination)
             self.weight = weight
     
     def add_node(self, label):
@@ -33,7 +33,7 @@ class WeightedGraph:
         for item in self.adjacency_list:
             neighbours = self.adjacency_list[item]
             for neighbour in neighbours:
-                print(neighbour.source, "-->", neighbour.destination, '(', neighbour.weight, ')')
+                print(neighbour.source.label, "-->", neighbour.destination.label, '(', neighbour.weight, ')')
         print()
 
 graph = WeightedGraph()
