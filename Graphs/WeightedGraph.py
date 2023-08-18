@@ -1,7 +1,11 @@
+class Path:
+    def __init__(self) -> None:
+        self.list = []
+
 class WeightedGraph:
     def __init__(self) -> None:
         self.nodes = {}
-        self.adjacency_list = {}
+        self.edges = {}
 
     class Node:
         def __init__(self, label) -> None:
@@ -13,6 +17,7 @@ class WeightedGraph:
         
         # def add_edge(self, destination, weight):
         #     self.edges[destination] = WeightedGraph.Edge(self.label, destination, weight)
+        
     class Edge:
         def __init__(self, source, destination, weight) -> None:
             self.source = WeightedGraph.Node(source)
@@ -25,12 +30,12 @@ class WeightedGraph:
     def add_node(self, label):
         if label not in self.nodes:
             self.nodes[label] = self.Node(label)
-            self.adjacency_list[label] = []
+            self.edges[label] = []
 
     def add_edge(self, source, destination, weight):
         if source not in self.nodes or destination not in self.nodes:
             raise Exception('Node does not exist')
-        current_source = self.adjacency_list[source]
+        current_source = self.edges[source]
         current_source.append(self.Edge(source, destination, weight))
         current_source.append(self.Edge(destination, source, weight))
 
@@ -49,8 +54,8 @@ class WeightedGraph:
     #     self.nodes[destination].add_edge(source, weight)
 
     def print_graph(self):
-        for item in self.adjacency_list:
-            neighbours = self.adjacency_list[item]
+        for item in self.edges:
+            neighbours = self.edges[item]
             for neighbour in neighbours:
                 print(neighbour)
         print()
@@ -62,13 +67,90 @@ class WeightedGraph:
     #             print(neighbours.edges[edge])
     #     print()
 
+    def get_shortest_distance(self, source, destination):
+        distances = {}
+        for node in self.nodes:
+            distances[node] = float('inf')
+        distances[source] = 0
+
+        visited = []
+        queue = [(0, source)]
+
+        while (len(queue) > 0):
+            current = queue.pop(0)[1]
+            visited.append(current)
+
+            for edge in self.edges[current]:
+                if edge.destination.label in visited:
+                    continue
+                new_distance = distances[current] + edge.weight
+                if new_distance < distances[edge.destination.label]:
+                    distances[edge.destination.label] = new_distance
+                    queue.append((new_distance, edge.destination.label))
+
+        print(distances[destination])
+        return distances[destination]
+
+    def get_shortest_path(self, source, destination):
+        distances = {}
+        for node in self.nodes:
+            distances[node] = float('inf')
+        distances[source] = 0
+
+        previous_nodes = {}
+        visited = []
+        queue = [(0, source)]
+
+        while (len(queue) > 0):
+            current = queue.pop(0)[1]
+            visited.append(current)
+
+            for edge in self.edges[current]:
+                if edge.destination.label in visited:
+                    continue
+                new_distance = distances[current] + edge.weight
+                if new_distance < distances[edge.destination.label]:
+                    distances[edge.destination.label] = new_distance
+                    previous_nodes[edge.destination.label] = current
+                    queue.append((new_distance, edge.destination.label))
+
+        stack = [self.nodes[destination].label]
+        previous = previous_nodes[destination]
+        while (previous is not None):
+            stack.append(previous)
+            if previous not in previous_nodes:
+                break
+            previous = previous_nodes[previous]
+
+        path = Path()
+        while (len(stack)> 0):
+            path.list.append(stack.pop(0))
+
+        return self.build_path(destination, previous_nodes)
+    
+    def build_path(self, destination, previous_nodes):
+        stack = [self.nodes[destination].label]
+        previous = previous_nodes[destination]
+        while (previous is not None):
+            stack.append(previous)
+            if previous not in previous_nodes:
+                break
+            previous = previous_nodes[previous]
+
+        path = Path()
+        while (len(stack)> 0):
+            path.list.append(stack.pop(0))
+        return path.list
+
 graph = WeightedGraph()
 graph.add_node('A')
 graph.add_node('B')
 graph.add_node('C')
-graph.add_edge('A', 'B', 3)
-graph.add_edge('A', 'C', 2)
+graph.add_edge('A', 'B', 1)
+graph.add_edge('B', 'C', 2)
+graph.add_edge('A', 'C', 10)
 graph.print_graph()
+print(graph.get_shortest_path('A', 'C'))
 
 # graph = WeightedGraph()
 # graph.add_node_('A')
