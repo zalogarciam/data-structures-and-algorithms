@@ -116,18 +116,6 @@ class WeightedGraph:
                     previous_nodes[edge.destination.label] = current
                     queue.append((new_distance, edge.destination.label))
 
-        stack = [self.nodes[destination].label]
-        previous = previous_nodes[destination]
-        while (previous is not None):
-            stack.append(previous)
-            if previous not in previous_nodes:
-                break
-            previous = previous_nodes[previous]
-
-        path = Path()
-        while (len(stack)> 0):
-            path.list.append(stack.pop(0))
-
         return self.build_path(destination, previous_nodes)
     
     def build_path(self, destination, previous_nodes):
