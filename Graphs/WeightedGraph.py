@@ -132,6 +132,9 @@ class WeightedGraph:
             path.list.append(stack.pop())
         return path.list
 
+    def has_cycle(self):
+        pass
+
 graph = WeightedGraph()
 graph.add_node('A')
 graph.add_node('B')
