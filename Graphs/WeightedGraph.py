@@ -92,6 +92,8 @@ class WeightedGraph:
         return distances[destination]
 
     def get_shortest_path(self, source, destination):
+        if source not in self.nodes or destination not in self.nodes:
+            raise Exception("Node does not exist")
         distances = {}
         for node in self.nodes:
             distances[node] = float('inf')
@@ -139,7 +141,7 @@ class WeightedGraph:
 
         path = Path()
         while (len(stack)> 0):
-            path.list.append(stack.pop(0))
+            path.list.append(stack.pop())
         return path.list
 
 graph = WeightedGraph()
