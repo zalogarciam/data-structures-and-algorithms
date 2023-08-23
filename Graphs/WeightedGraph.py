@@ -150,6 +150,9 @@ class WeightedGraph:
             if node not in visited and self.has_cycle_(node, None, visited):
                 return True
         return False
+    
+    def get_minimum_spanning_tree(self):
+        pass
             
 graph = WeightedGraph()
 graph.add_node('A')
