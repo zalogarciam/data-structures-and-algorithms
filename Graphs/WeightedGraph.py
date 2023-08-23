@@ -151,20 +151,56 @@ class WeightedGraph:
                 return True
         return False
     
+    def contains_node(self, label):
+        return label in self.nodes
+    
     def get_minimum_spanning_tree(self):
-        pass
+        tree = WeightedGraph()
+
+        if len(self.nodes) == 0:
+            return tree
+
+        edges = []
+        
+        start_node = next(iter(self.nodes))
+        for edge in self.edges[start_node]:
+            edges.append((edge.weight, edge))
+        tree.add_node(start_node)
+
+        if not edges:
+            return tree
+
+        while len(tree.nodes) < len(self.nodes):
+            min_edge = edges.pop()
+            next_node = min_edge[1].destination.label
+
+            if tree.contains_node(next_node):
+                continue
+
+            tree.add_node(next_node)
+            tree.add_edge(min_edge[1].source.label, next_node, min_edge[0])
+
+            for edge in self.edges[next_node]:
+                if not tree.contains_node(edge.destination.label):
+                    edges.append((edge.weight, edge))
+
+        return tree
             
 graph = WeightedGraph()
 graph.add_node('A')
 graph.add_node('B')
 graph.add_node('C')
-graph.add_edge('A', 'B', 1)
+graph.add_node('D')
+
+graph.add_edge('A', 'B', 3)
+graph.add_edge('B', 'D', 4)
+graph.add_edge('C', 'D', 5)
+graph.add_edge('A', 'C', 1)
 graph.add_edge('B', 'C', 2)
-graph.add_edge('C', 'A', 10)
 graph.print_graph()
 # print(graph.get_shortest_path('A', 'C'))
-print(graph.has_cycle())
-
+# print(graph.has_cycle())
+graph.get_minimum_spanning_tree().print_graph()
 # graph = WeightedGraph()
 # graph.add_node_('A')
 # graph.add_node_('B')
