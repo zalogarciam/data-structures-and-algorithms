@@ -132,18 +132,35 @@ class WeightedGraph:
             path.list.append(stack.pop())
         return path.list
 
-    def has_cycle(self):
-        pass
+    def has_cycle_(self, node, parent, visited):
+        visited.append(node)
 
+        for edge in self.edges[node.label]:
+            if edge.destination == parent:
+                continue
+            if edge.destination in visited or self.has_cycle_(edge.destination, node, visited):
+                return True
+
+        return False
+        
+    # Only on directed graphs
+    def has_cycle(self):
+        visited = []
+        for node in self.nodes:
+            if node not in visited and self.has_cycle_(self.nodes[node], None, visited):
+                return True
+        return False
+            
 graph = WeightedGraph()
 graph.add_node('A')
 graph.add_node('B')
 graph.add_node('C')
 graph.add_edge('A', 'B', 1)
-graph.add_edge('B', 'C', 2)
-graph.add_edge('A', 'C', 10)
+# graph.add_edge('B', 'C', 2)
+# graph.add_edge('C', 'A', 10)
 graph.print_graph()
-print(graph.get_shortest_path('A', 'C'))
+# print(graph.get_shortest_path('A', 'C'))
+print(graph.has_cycle())
 
 # graph = WeightedGraph()
 # graph.add_node_('A')
