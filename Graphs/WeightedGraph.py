@@ -35,9 +35,9 @@ class WeightedGraph:
     def add_edge(self, source, destination, weight):
         if source not in self.nodes or destination not in self.nodes:
             raise Exception('Node does not exist')
-        current_source = self.edges[source]
-        current_source.append(self.Edge(source, destination, weight))
-        current_source.append(self.Edge(destination, source, weight))
+        # current_source = self.edges[source]
+        self.edges[source].append(self.Edge(source, destination, weight))
+        self.edges[destination].append(self.Edge(destination, source, weight))
 
         # current_destination = self.adjacency_list[destination]
         # current_destination.append(self.Edge(source, destination, weight))
@@ -135,10 +135,10 @@ class WeightedGraph:
     def has_cycle_(self, node, parent, visited):
         visited.append(node)
 
-        for edge in self.edges[node.label]:
-            if edge.destination == parent:
+        for edge in self.edges[node]:
+            if  edge.destination.label == parent:
                 continue
-            if edge.destination in visited or self.has_cycle_(edge.destination, node, visited):
+            if edge.destination.label in visited or self.has_cycle_(edge.destination.label, node, visited):
                 return True
 
         return False
@@ -147,7 +147,7 @@ class WeightedGraph:
     def has_cycle(self):
         visited = []
         for node in self.nodes:
-            if node not in visited and self.has_cycle_(self.nodes[node], None, visited):
+            if node not in visited and self.has_cycle_(node, None, visited):
                 return True
         return False
             
@@ -156,8 +156,8 @@ graph.add_node('A')
 graph.add_node('B')
 graph.add_node('C')
 graph.add_edge('A', 'B', 1)
-# graph.add_edge('B', 'C', 2)
-# graph.add_edge('C', 'A', 10)
+graph.add_edge('B', 'C', 2)
+graph.add_edge('C', 'A', 10)
 graph.print_graph()
 # print(graph.get_shortest_path('A', 'C'))
 print(graph.has_cycle())
