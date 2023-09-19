@@ -14,5 +14,5 @@ def swap(array, index1, index2):
     array[index2] = temp
 
 numbers = [7,3,1,4,6,2,3]
-sort = bubble_sort([numbers])
+sort = bubble_sort(numbers)
 print(numbers)
