@@ -1,3 +1,8 @@
+#               Best        Worst
+# Passes        O(1)        O(n) # I can check if it is already sorted
+# Comparisons   O(n)        O(n)
+# Total         O(n)        O(n^2)
+
 def bubble_sort(array):
     is_sorted = True
     for i in range(len(array)):

@@ -1,3 +1,8 @@
+#               Best        Worst
+# Iteration     O(n)        O(n)
+# Shift Item    O(1)        O(n) # 1 if the array is sorted in asc
+# Total         O(n)        O(n^2)
+
 def insertion_sort(array):
     for i in range(1, len(array)):
         current = array[i] # store element 

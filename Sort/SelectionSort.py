@@ -1,3 +1,8 @@
+#               Best        Worst
+# Iteration     O(n)        O(n)
+# Shift Item    O(n)        O(n)
+# Total         O(n^2)        O(n^2)
+
 def selection_sort(array):
     for i in range(len(array)):
         min_index = i

@@ -1,3 +1,9 @@
+#               Best        Worst
+# Dividing      O(log n)    O(log n)
+# Merging       O(n)        O(n)
+# Total         O(n log(n)) O(n log n)
+# Space         O(n)   O(n)
+
 def merge_sort(array):
     if len(array) <= 1: return array
 
