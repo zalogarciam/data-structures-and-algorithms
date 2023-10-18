@@ -28,6 +28,32 @@ class Tree():
                     break
                 current = current.right
 
+    def remove(self, root, data):
+        if not root:
+            return root
+        if root.data > data:
+            root.left = self.remove(root.left, data)
+        elif root.data < data:
+            root.right = self.remove(root.right, data)
+        else:
+            if root.right is None:
+                return root.left
+            if root.left is None:
+                return root.right
+            # If both left and right children exist in the node replace its value with
+            # the minmimum value in the right subtree. Now delete that minimum node
+            # in the right subtree
+            tmp = self.min(root.right)
+            root.data = tmp.data
+            root.right = self.remove(root.right, tmp.data)
+        return root
+
+    def min(self, root):
+        current = root
+        while current.left is not None:
+            current = current.left
+        return current
+
     def find(self, data):
         if self.root.data == data:
             return True
@@ -228,19 +254,25 @@ tree.insert(6)
 tree.insert(1)
 tree.insert(8)
 tree.insert(12)
+tree.insert(13)
+tree.insert(11)
 tree.insert(18)
+tree.insert(20)
 tree.insert(17)
+tree.in_order_level(tree.root)
 
-tree_to_invert = Tree()
-root = Node(1)
-root.left = Node(2)
-root.right = Node(3)
-root.right.left = Node(4)
-# root.left.right = Node(5)
-tree_to_invert.root = root
-tree_to_invert.in_order_level(tree_to_invert.root)
-inverted_root = tree_to_invert.invert(tree_to_invert.root)
-tree_to_invert.in_order_level(inverted_root)
+tree.remove(tree.root, 15)
+tree.in_order_level(tree.root)
+# tree_to_invert = Tree()
+# root = Node(1)
+# root.left = Node(2)
+# root.right = Node(3)
+# root.right.left = Node(4)
+# # root.left.right = Node(5)
+# tree_to_invert.root = root
+# tree_to_invert.in_order_level(tree_to_invert.root)
+# inverted_root = tree_to_invert.invert(tree_to_invert.root)
+# tree_to_invert.in_order_level(inverted_root)
 
 # print(tree.find(6))
 # print(tree.find(7))
