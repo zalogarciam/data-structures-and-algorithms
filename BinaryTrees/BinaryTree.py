@@ -9,6 +9,19 @@ class Tree():
     def __init__(self) -> None:
         self.root = None
 
+    def insert_node(self, root, key):
+        # Base case: if the tree is empty, create a new node
+        if root is None:
+            return Node(key)
+
+        # Recursive case: insert into the left or right subtree
+        if key < root.key:
+            root.left = self.insert_node(root.left, key)
+        elif key > root.key:
+            root.right = self.insert_node(root.right, key)
+
+        return root
+    
     def insert(self, data):
         if self.root is None:
             self.root = Node(data)
@@ -246,6 +259,40 @@ class Tree():
         root.right = left
         return root
 
+
+    def find_depth(self, root, key, depth=0):
+        if root is None:
+            return None
+
+        if root.data == key:
+            return depth
+
+        if key < root.data:
+            return self.find_depth(root.left, key, depth + 1)
+        else:
+            return self.find_depth(root.right, key, depth + 1)
+
+    def find_height(self, root, key):
+        if root is None:
+            return None
+
+        if root.data == key:
+            return max(self.find_tree_height(root.left), self.find_tree_height(root.right))
+
+        if key < root.data:
+            return self.find_height(root.left, key) + 1
+        else:
+            return self.find_height(root.right, key) + 1
+
+    def find_tree_height(self, root):
+        if root is None:
+            return -1
+
+        left_height = self.find_tree_height(root.left)
+        right_height = self.find_tree_height(root.right)
+
+        return max(left_height, right_height) + 1
+
 tree = Tree()
 tree.insert(10)
 tree.insert(5)
@@ -263,6 +310,7 @@ tree.in_order_level(tree.root)
 
 tree.remove(tree.root, 15)
 tree.in_order_level(tree.root)
+print(tree.find_height(tree.root, 10))
 # tree_to_invert = Tree()
 # root = Node(1)
 # root.left = Node(2)
