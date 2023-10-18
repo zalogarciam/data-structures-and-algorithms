@@ -209,7 +209,16 @@ class Tree():
             return True
         return False
         
+    def invert(self, root):
+        if (root == None):
+            return root
 
+        left = self.invert(root.left)
+        right = self.invert(root.right)
+
+        root.left = right
+        root.right = left
+        return root
 
 tree = Tree()
 tree.insert(10)
@@ -221,6 +230,17 @@ tree.insert(8)
 tree.insert(12)
 tree.insert(18)
 tree.insert(17)
+
+tree_to_invert = Tree()
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.right.left = Node(4)
+# root.left.right = Node(5)
+tree_to_invert.root = root
+tree_to_invert.in_order_level(tree_to_invert.root)
+inverted_root = tree_to_invert.invert(tree_to_invert.root)
+tree_to_invert.in_order_level(inverted_root)
 
 # print(tree.find(6))
 # print(tree.find(7))
@@ -273,15 +293,15 @@ tree.insert(17)
 
 # tree.pre_order(tree.root)
 # tree.in_order(tree.root)
-tree.in_order_level(tree.root, 1)
+# tree.in_order_level(tree.root, 1)
 # tree.pos_order(tree.root)
-tree.get_ancestors(tree.root, 8)
+# tree.get_ancestors(tree.root, 8)
 
 # tree3.swap_root()
 # print(tree.validate_bst(tree3.root, -float('inf'), float('inf')))
 # print(tree3.validate_bst(tree3.root, -float('inf'), float('inf')))
 # tree3.nodes_at_k_distance(tree3.root, 3)
 # tree3.print_nodes_at_distance(tree3.root, 3)
-print(tree.get_nodes_at_distance(tree.root, 3))
+# print(tree.get_nodes_at_distance(tree.root, 3))
 # tree3.traverse_level_order()
 # tree3.bfs(tree3.root)
