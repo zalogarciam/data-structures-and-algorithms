@@ -4,44 +4,6 @@
 # Insert in the middle O(n)
 # Delete at the start is O(1) and O(n) if its end, if its in the middle O(n)
 
-# Supongamos que tenemos una lista enlazada que funciona como la combinacion de una lista
-# enlazada doble y una lista enlazada circular. Esta lista enlazada contiene un metodo
-# que obtiene la cola a partir desde la cabeza. ¿Cuál es la complejidad de tiempo
-# de este metodo?
-
-# Sabemos que un arreglo tiene un tamaño predefinido y se puede acceder a un elemento
-# mediante su indice. Por ejemplo, si tenemos este arreglo: [10,20,30,40,50], y el indice es 3
-# el numero retornado es: 40. Con este escenario, ¿Cuál de estas alternativas es CORRECTA
-# con respecto a una lista enlazada simple?.
-
-# Supongamos que tenemos una lista enlazada doble que contiene 3 metodos. Un metodo para
-# insertar un elemento al comienzo de la lista, otro metodo para insertar un elemento al 
-# final de la lista, y un metodo para insertar un elemento al medio de la lista. 
-# ¿Cuál de estas alternativas es CORRECTA?
-
-# Supongamos que tenemos una lista enlazada simple y una lista enlazada doble, ambos cuentan
-# con un metodo para eliminar un elemento al final de la lista. ¿Cuál de estas alternativas 
-# es CORRECTA con respecto a esta eliminacion de elementos al final de la lista?
-
-# Supogamos que tenemos una lista enlazada simple con CABEZA/HEAD pero sin COLA/TAIL como se
-# muestra en la imagen. ¿Cuál seria la complejidad de tiempo para la eliminacion de elementos
-# al final de dicha lista enlazada?
-
-# Tenemos este metodo que recibe un arreglo y retorna una lista enlazada ¿Cuál seria 
-# la principal funcionalidad de este metodo sabiendo que el metodo insert de la lista
-# enlazada inserta al comienzo de la lista enlazada?
- 
-def metodo(self, arreglo):
-    lista_enlazada = LinkedList()
-    for i in range(len(arreglo) -1):
-        lista_enlazada.insert(arreglo[i])
-    return lista_enlazada
-
-
-class LinkedList():
-    def __init__(self):
-        self.head = None
-
 class Node():
     def __init__(self, value):
         self.value = value
